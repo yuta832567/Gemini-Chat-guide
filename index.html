@@ -1,0 +1,2667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Chatの詳細・制約まとめ｜2026年6月版（6/14更新）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&amp;family=Noto+Sans+JP:wght@300;400;500;700&amp;family=DM+Serif+Display&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg-warm: #f5f2ea;
+    --paper: #ffffff;
+    --ink: #141414;
+    --ink-sub: #4a4a4a;
+    --ink-soft: #6a6a6a;
+    --ink-light: #9a9a9a;
+    --line: #e6e4dd;
+    --line-soft: #f0eee7;
+    --gold: #b8893f;
+    --gold-deep: #8a6420;
+    --gold-soft: #faf3e6;
+    --gold-pale: #fdfaf0;
+    --blue: #1967d2;
+    --blue-soft: #e8f0fe;
+    --purple: #6231a8;
+    --purple-deep: #4a2584;
+    --purple-soft: #f1ebfa;
+    --purple-pale: #faf7fd;
+    --green: #1e7e3a;
+    --green-soft: #e6f4ea;
+    --red: #c5363a;
+    --red-soft: #fbebec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    line-height: 1.78;
+    font-feature-settings: "palt";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 64px 36px 120px; }
+
+  /* ================================ */
+  /* HERO */
+  /* ================================ */
+  .hero { position: relative; padding-bottom: 48px; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .eyebrow {
+    font-family: "DM Serif Display", serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  h1 {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(40px, 5.8vw, 64px);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  h1 .accent { color: var(--gold); font-weight: 400; }
+  .hero-sub {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(17px, 2vw, 20px);
+    font-weight: 400;
+    color: var(--ink-sub);
+    max-width: 780px;
+    margin-bottom: 10px;
+    line-height: 1.65;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 780px;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    margin-top: 40px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 36px;
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+  .hero-meta strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-sub);
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-family: "DM Serif Display", serif;
+  }
+  .hero-meta span { font-weight: 400; color: var(--ink); font-size: 14px; }
+  @media (max-width: 640px) { .hero-meta { grid-template-columns: 1fr; gap: 16px; } }
+
+  /* What's new */
+  .whats-new {
+    margin-top: 40px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    padding: 22px 28px;
+    border-radius: 2px;
+  }
+  .whats-new .wn-label {
+    font-family: "DM Serif Display", serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .whats-new h2 {
+    font-family: "Noto Serif JP", serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .whats-new ul { list-style: none; font-size: 13.5px; color: var(--ink-sub); line-height: 1.9; }
+  .whats-new li { padding-left: 18px; position: relative; }
+  .whats-new li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+    top: 4px;
+  }
+  .whats-new li strong { color: var(--ink); font-weight: 500; }
+
+  /* Audience box */
+  .audience {
+    margin-top: 24px;
+    background: linear-gradient(135deg, #fdfcf7 0%, #faf7ec 100%);
+    border: 1px solid #e6dcc0;
+    padding: 26px 30px;
+    border-radius: 2px;
+  }
+  .audience-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .audience-item { font-size: 13.5px; color: var(--ink-sub); line-height: 1.75; }
+  .audience-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-family: "Noto Serif JP", serif;
+  }
+  @media (max-width: 640px) { .audience-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+  /* ================================ */
+  /* TOC */
+  /* ================================ */
+  .toc {
+    margin: 56px 0 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 36px 40px;
+    border-radius: 2px;
+  }
+  .toc-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .toc-subtitle {
+    font-family: "DM Serif Display", serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .toc-group { margin-bottom: 22px; }
+  .toc-group:last-child { margin-bottom: 0; }
+  .toc-group-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toc-group-title .part-num {
+    font-family: "DM Serif Display", serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+  .toc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 28px; }
+  .toc-item {
+    font-size: 13.5px;
+    color: var(--ink-sub);
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc-item a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .toc-item a:hover { color: var(--gold); }
+  .toc-num {
+    color: var(--gold);
+    font-family: "DM Serif Display", serif;
+    font-size: 13px;
+    flex-shrink: 0;
+    min-width: 22px;
+  }
+  @media (max-width: 640px) { .toc-list { grid-template-columns: 1fr; } }
+
+  /* ================================ */
+  /* PART DIVIDER */
+  /* ================================ */
+  .part-divider {
+    margin: 120px 0 48px;
+    text-align: center;
+    position: relative;
+  }
+  .part-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--line) 20%, var(--line) 80%, transparent);
+    z-index: 0;
+  }
+  .part-label-wrap {
+    display: inline-block;
+    background: var(--bg);
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .part-label {
+    font-family: "DM Serif Display", serif;
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .part-title {
+    font-family: "Noto Serif JP", serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 14px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .part-desc {
+    color: var(--ink-sub);
+    font-size: 15px;
+    margin-top: 12px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* ================================ */
+  /* SECTION */
+  /* ================================ */
+  section { margin-top: 80px; scroll-margin-top: 20px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-num {
+    font-family: "DM Serif Display", serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+  .section-tag {
+    font-family: "DM Serif Display", serif;
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+  h2 {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(26px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  h2 .emoji { margin-right: 10px; font-size: 0.88em; }
+  .lede {
+    font-size: 16px;
+    color: var(--ink-sub);
+    margin-bottom: 36px;
+    max-width: 820px;
+    line-height: 1.8;
+  }
+  h3 {
+    font-family: "Noto Serif JP", serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin: 44px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink);
+  }
+  h3::before {
+    content: "";
+    width: 4px;
+    height: 20px;
+    background: var(--ink);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  h4 {
+    font-family: "Noto Serif JP", serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 22px 0 10px;
+    color: var(--ink);
+  }
+  p {
+    margin-bottom: 16px;
+    color: var(--ink-sub);
+    font-size: 15.5px;
+    line-height: 1.85;
+  }
+
+  /* ================================ */
+  /* PRICING CARDS - elegant plan display */
+  /* ================================ */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 32px 0 16px;
+  }
+  .pricing-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 24px 20px;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-card.free { background: #fbfaf5; }
+  .pricing-card.plus { border-top: 3px solid var(--blue); }
+  .pricing-card.pro {
+    background: linear-gradient(180deg, #fffdf7 0%, #fffdf7 100%);
+    border: 1px solid var(--gold);
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 4px 14px rgba(184, 137, 63, 0.08);
+  }
+  .pricing-card.ultra { border-top: 3px solid var(--purple); background: var(--purple-pale); }
+  .pc-featured {
+    position: absolute;
+    top: -10px;
+    right: 14px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 10px;
+    padding: 3px 10px;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    font-weight: 500;
+    font-family: "DM Serif Display", serif;
+    text-transform: uppercase;
+  }
+  .pc-tier {
+    font-family: "DM Serif Display", serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .pricing-card.pro .pc-tier { color: var(--gold); }
+  .pricing-card.ultra .pc-tier { color: var(--purple); }
+  .pricing-card.plus .pc-tier { color: var(--blue); }
+  .pc-name {
+    font-family: "Noto Serif JP", serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .pc-price {
+    font-family: "DM Serif Display", serif;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+  .pc-price-sub {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .pc-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 8px 0 16px;
+  }
+  .pc-feat {
+    font-size: 12.5px;
+    padding: 5px 0;
+    color: var(--ink-sub);
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .pc-feat strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pc-feat-dot {
+    color: var(--gold);
+    font-size: 10px;
+    flex-shrink: 0;
+    line-height: 1.8;
+  }
+  .pricing-card.plus .pc-feat-dot { color: var(--blue); }
+  .pricing-card.ultra .pc-feat-dot { color: var(--purple); }
+  @media (max-width: 900px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+  /* ================================ */
+  /* COMPARE CARDS (Free vs Pro) */
+  /* ================================ */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .compare-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 26px 28px;
+    position: relative;
+  }
+  .compare-card.free { border-top: 3px solid var(--ink-light); }
+  .compare-card.pro {
+    border-top: 3px solid var(--gold);
+    background: linear-gradient(180deg, #fffdf7 0%, #ffffff 100%);
+  }
+  .compare-card.ultra {
+    border-top: 3px solid var(--purple);
+    background: var(--purple-pale);
+  }
+  .cc-badge {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: "DM Serif Display", serif;
+    text-transform: uppercase;
+  }
+  .cc-badge.free { background: #ede9df; color: var(--ink-sub); }
+  .cc-badge.pro { background: var(--gold); color: #fff; }
+  .cc-badge.plus { background: var(--blue-soft); color: var(--blue); }
+  .cc-badge.ultra { background: var(--purple); color: #fff; }
+  .cc-name {
+    font-family: "Noto Serif JP", serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .cc-row {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .cc-row:last-child { border-bottom: none; }
+  .cc-icon {
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    width: 14px;
+    text-align: center;
+  }
+  .cc-icon.ok { color: var(--green); }
+  .cc-icon.ng { color: var(--red); }
+  .cc-icon.warn { color: var(--gold); }
+  .cc-text { flex: 1; line-height: 1.6; color: var(--ink-sub); }
+  .cc-text strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
+
+  /* Triple cards */
+  .triple { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+  @media (max-width: 720px) { .triple { grid-template-columns: 1fr; } }
+
+  /* ================================ */
+  /* TABLES */
+  /* ================================ */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 24px 0;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    border-radius: 2px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 560px;
+  }
+  thead { background: #f7f4ec; }
+  th {
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 500;
+    font-size: 12.5px;
+    letter-spacing: 0.05em;
+    color: var(--ink-sub);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-family: "DM Serif Display", serif;
+  }
+  th.num, td.num { text-align: center; }
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink);
+    vertical-align: middle;
+    line-height: 1.55;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #faf8f2; }
+  .label-cell { font-weight: 500; color: var(--ink); }
+  .muted { color: var(--ink-light); font-size: 12.5px; display: block; margin-top: 2px; }
+  .plan-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    font-family: "DM Serif Display", serif;
+    text-transform: uppercase;
+  }
+  .plan-pill.free { background: #f0efea; color: var(--ink-sub); }
+  .plan-pill.plus { background: var(--blue-soft); color: var(--blue); }
+  .plan-pill.pro { background: var(--gold-soft); color: var(--gold-deep); }
+  .plan-pill.ultra { background: var(--purple-soft); color: var(--purple); }
+
+  .dash { color: var(--ink-light); font-family: "DM Serif Display", serif; font-size: 16px; }
+  .check-on { color: var(--green); font-weight: 500; }
+
+  /* ================================ */
+  /* CALLOUTS */
+  /* ================================ */
+  .callout {
+    background: var(--paper);
+    border-left: 3px solid var(--blue);
+    padding: 20px 26px;
+    margin: 24px 0;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .callout.warn { border-left-color: var(--red); background: var(--red-soft); }
+  .callout.tip { border-left-color: var(--green); background: var(--green-soft); }
+  .callout.note { border-left-color: var(--gold); background: var(--gold-soft); }
+  .callout .c-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .callout.warn .c-title { color: var(--red); }
+  .callout.tip .c-title { color: var(--green); }
+  .callout.note .c-title { color: var(--gold-deep); }
+  .callout .c-title::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+  .callout p {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ================================ */
+  /* GLOSSARY (refined) */
+  /* ================================ */
+  .glossary {
+    background: #fdfcf7;
+    border: 1px solid #e8dfc3;
+    padding: 18px 22px;
+    margin: 18px 0 28px;
+    font-size: 13.5px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .glossary::before {
+    content: "用語";
+    position: absolute;
+    top: -9px;
+    left: 14px;
+    background: #fdfcf7;
+    padding: 0 8px;
+    font-family: "DM Serif Display", serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .glossary strong {
+    color: var(--ink);
+    font-size: 14.5px;
+    display: block;
+    margin-bottom: 6px;
+    font-family: "Noto Serif JP", serif;
+    font-weight: 600;
+  }
+  .glossary .def { color: var(--ink-sub); line-height: 1.75; }
+  .glossary .ex {
+    color: var(--ink-light);
+    font-size: 12.5px;
+    margin-top: 6px;
+    line-height: 1.6;
+    padding-left: 12px;
+    border-left: 2px solid var(--line);
+  }
+
+  /* ================================ */
+  /* STAT GRID */
+  /* ================================ */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 22px 0;
+  }
+  .stat-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 20px 18px;
+    border-radius: 2px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  }
+  .st-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-family: "DM Serif Display", serif;
+  }
+  .st-value {
+    font-family: "DM Serif Display", serif;
+    font-size: 32px;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .st-value.gold { color: var(--gold); }
+  .st-value.purple { color: var(--purple); }
+  .st-value.blue { color: var(--blue); }
+  .st-value.sub {
+    font-size: 14px;
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .st-value span.unit {
+    font-size: 13px;
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--ink-light);
+    font-weight: 400;
+  }
+  .st-note {
+    font-size: 11.5px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ================================ */
+  /* FILE GRID (large numeric cards) */
+  /* ================================ */
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .file-card {
+    border: 1px solid var(--line);
+    padding: 22px 20px;
+    background: var(--paper);
+    border-radius: 2px;
+    position: relative;
+  }
+  .file-card .icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .file-card .ftype {
+    font-family: "Noto Serif JP", serif;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .file-card .fval {
+    font-family: "DM Serif Display", serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin: 6px 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .file-card .fval span {
+    font-size: 12px;
+    color: var(--ink-light);
+    font-weight: 400;
+    font-family: "Noto Sans JP", sans-serif;
+    margin-left: 2px;
+  }
+  .file-card .fnote {
+    font-size: 11.5px;
+    color: var(--ink-light);
+    line-height: 1.55;
+    margin-top: 4px;
+  }
+
+  /* ================================ */
+  /* DURATION / MEDIA COMPARE */
+  /* ================================ */
+  .media-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 22px 0;
+  }
+  .media-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 22px 24px;
+    border-radius: 2px;
+  }
+  .media-card .mc-head {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    font-family: "Noto Serif JP", serif;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mc-head .icon-lg { font-size: 18px; }
+  .duration-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .duration-row:last-child { border-bottom: none; }
+  .d-label { font-size: 12.5px; color: var(--ink-sub); }
+  .d-value {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "DM Serif Display", serif;
+    color: var(--ink);
+  }
+  .d-value.emphasis { color: var(--gold); }
+  @media (max-width: 720px) { .media-compare { grid-template-columns: 1fr; } }
+
+  /* ================================ */
+  /* BAR CHART */
+  /* ================================ */
+  .bar-chart {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 28px 30px;
+    border-radius: 2px;
+    margin: 22px 0;
+  }
+  .bar-chart h4 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+  }
+  .bar-chart .bc-subtitle {
+    font-size: 12px;
+    color: var(--ink-light);
+    margin-bottom: 18px;
+    font-family: "DM Serif Display", serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 70px;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .bar-label .tag-best {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 0 6px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    vertical-align: middle;
+    font-family: "DM Serif Display", serif;
+  }
+  .bar-track {
+    background: #f3efe6;
+    height: 24px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 500;
+    font-family: "DM Serif Display", serif;
+    letter-spacing: 0.03em;
+    transition: width 1s ease-out;
+  }
+  .bar-fill.gemini3 { background: var(--gold); }
+  .bar-fill.gemini3x { background: var(--gold-deep); }
+  .bar-fill.claude { background: #6c4e34; }
+  .bar-fill.gpt { background: #8b6a3f; }
+  .bar-fill.old { background: #c5b38a; color: #6a5834; }
+  .bar-fill.neutral { background: #b5b5b5; }
+  .bar-fill.accent-blue { background: var(--blue); }
+  .bar-fill.accent-gold { background: var(--gold); }
+  .bar-fill.accent-red { background: var(--red); }
+  .bar-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: right;
+    font-family: "DM Serif Display", serif;
+  }
+  @media (max-width: 540px) { .bar-row { grid-template-columns: 90px 1fr 60px; } }
+
+  /* ================================ */
+  /* STEPS */
+  /* ================================ */
+  .steps { display: grid; gap: 10px; margin: 22px 0; }
+  .step {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    border-radius: 2px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .step-num {
+    font-family: "DM Serif Display", serif;
+    font-size: 26px;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 32px;
+    letter-spacing: -0.02em;
+  }
+  .step-content { flex: 1; }
+  .step-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 15px;
+    color: var(--ink);
+    font-family: "Noto Serif JP", serif;
+  }
+  .step-desc {
+    font-size: 13.5px;
+    color: var(--ink-sub);
+    line-height: 1.7;
+  }
+
+  /* ================================ */
+  /* TAGS */
+  /* ================================ */
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-right: 4px;
+    font-family: "DM Serif Display", serif;
+  }
+  .tag-yes { background: var(--green-soft); color: var(--green); }
+  .tag-no { background: var(--red-soft); color: var(--red); }
+  .tag-partial { background: var(--gold-soft); color: var(--gold-deep); }
+  .tag-new { background: var(--blue); color: #fff; }
+  .tag-update { background: var(--gold); color: #fff; }
+
+  /* Summary boxes */
+  .summary-box {
+    background: linear-gradient(135deg, #fdfcf7 0%, #faf7ec 100%);
+    border: 1px solid #e8dfc3;
+    padding: 20px 26px;
+    margin: 28px 0 0;
+    border-radius: 2px;
+    position: relative;
+  }
+  .summary-box::before {
+    content: "要点";
+    position: absolute;
+    top: -10px;
+    left: 18px;
+    background: var(--gold);
+    color: #fff;
+    padding: 3px 10px;
+    font-family: "DM Serif Display", serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .summary-box p {
+    font-size: 14.5px;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.8;
+  }
+  .summary-box p strong { color: var(--gold-deep); font-weight: 600; }
+
+  /* Highlight box for new content */
+  .new-feature {
+    background: #f7f9fc;
+    border: 1px solid #d5e4fb;
+    border-left: 4px solid var(--blue);
+    padding: 18px 24px;
+    margin: 20px 0;
+    border-radius: 0 2px 2px 0;
+    position: relative;
+  }
+  .new-feature::before {
+    content: "追加情報";
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--blue);
+    color: #fff;
+    padding: 3px 10px;
+    font-family: "DM Serif Display", serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .new-feature h4 {
+    margin-top: 0;
+    color: var(--blue);
+    font-size: 14.5px;
+  }
+  .new-feature p { font-size: 13.5px; margin-bottom: 6px; }
+  .new-feature p:last-child { margin-bottom: 0; }
+
+  /* ================================ */
+  /* ULTRA SECTION SPECIAL */
+  /* ================================ */
+  .ultra-section {
+    background: linear-gradient(135deg, #faf7fd 0%, #fdfcff 100%);
+    border: 1px solid #e0d4ef;
+    border-radius: 4px;
+    padding: 48px 44px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ultra-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--purple-soft) 0%, transparent 70%);
+    opacity: 0.5;
+  }
+  .ultra-section h2 { color: var(--purple); position: relative; z-index: 1; }
+  .ultra-section h3::before { background: var(--purple); }
+  .ultra-section .section-num { color: var(--purple); }
+  .ultra-section .st-value.purple { color: var(--purple); }
+
+  /* ================================ */
+  /* FOOTER */
+  /* ================================ */
+  footer {
+    margin-top: 120px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-light);
+    line-height: 1.85;
+  }
+  footer strong {
+    color: var(--ink-sub);
+    font-family: "Noto Serif JP", serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .sources {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+  }
+  .sources li {
+    list-style: none;
+    margin-bottom: 2px;
+    font-size: 12px;
+    padding-left: 12px;
+    position: relative;
+  }
+  .sources li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  .footer-meta {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: var(--ink-light);
+  }
+  @media (max-width: 640px) {
+    .sources { grid-template-columns: 1fr; }
+    .footer-meta { flex-direction: column; gap: 4px; }
+  }
+
+  /* Utility */
+  .no-break { white-space: nowrap; }
+  .tiny { font-size: 12px; color: var(--ink-light); }
+
+  /* Specific for Gems English note */
+  .lang-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .lang-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 20px;
+    border-radius: 2px;
+  }
+  .lang-card h4 {
+    font-size: 15px;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .lang-card h4.jp { color: var(--red); }
+  .lang-card h4.en { color: var(--blue); }
+  .lang-card .lc-row {
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line-soft);
+    color: var(--ink-sub);
+  }
+  .lang-card .lc-row:last-child { border-bottom: none; }
+  .lang-card .lc-row strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 720px) { .lang-compare { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================= -->
+<!-- HERO -->
+<!-- ============================================================= -->
+<header class="hero">
+  <div class="eyebrow">GEMINI CHAT — COMPREHENSIVE REFERENCE GUIDE</div>
+  <h1>Gemini Chatの<br>詳細・<span class="accent">制約まとめ</span></h1>
+  <p class="hero-sub">機能の基本制約から、カスタム指示・メモリー・著作権・Gemsまで。</p>
+  <p class="hero-desc">無料版とGoogle AI Proを中心に比較し、最下部にUltraプラン情報を補足しています。Google I/O 2026（5/19）以降の最新情報でファクトチェック済み。</p>
+
+  <div class="hero-meta">
+    <div><strong>調査日</strong><span>2026年6月14日</span></div>
+    <div><strong>主対象プラン</strong><span>無料版・Google AI Pro</span></div>
+    <div><strong>情報源</strong><span>Google公式ヘルプ／報道記事</span></div>
+  </div>
+
+  <!-- What's new in this version -->
+  <div class="whats-new">
+    <div class="wn-label">VERSION 3.1 — 2026/06/14 UPDATE（GOOGLE I/O 2026 反映・厳密ファクトチェック済み）</div>
+    <h2>4月版からの主な変更点（要チェック）</h2>
+    <ul>
+      <li><strong>【最重要】使用量の仕組みが刷新：</strong>5月17〜20日に「1日◯回」方式を廃止し、<strong>コンピュート使用量モデル（5時間ごと＋週次上限）</strong>へ移行。公式は日次の具体回数を非公表に</li>
+      <li><strong>料金プランを再編：</strong>AI Plusは¥1,200→<strong>¥725</strong>（ストレージも200GB→400GB）。Ultraは単一¥36,400→<strong>¥14,500（5倍枠）／¥32,000（20倍枠）の2段階</strong>に</li>
+      <li><strong>新モデルを追加：</strong>Google I/O 2026で<strong>Gemini 3.5 Flash</strong>（一般提供開始）、<strong>Gemini 3.5 Pro</strong>（6月ロールアウト）、動画の新モデル<strong>Gemini Omni</strong>が登場</li>
+      <li><strong>使用量は「倍率」で提示：</strong>無料版を基準に Plus＝2倍／Pro＝4倍／Ultra＝最大20倍という相対表記に変更</li>
+      <li><strong>Nano Banana Pro が正式版に：</strong>正式名称「Gemini 3 Pro Image」として2026年6月に一般提供開始</li>
+      <li><strong>学生特典を更新：</strong>日本を含む対象国の18歳以上の学生は、2026年7月までの申込みでProへ無料アップグレード可能</li>
+      <li><strong>上限到達時の挙動を明記：</strong>週次上限に達すると <strong>Gemini 3 Flash-Lite</strong> に切り替わって会話を継続できる</li>
+      <li><strong>【6/14 ファクトチェック修正】</strong>事実性ベンチマークを公式公表値のみに差し替え。一次情報で確認できなかった「Gemini 3.1 Pro 79.6%」や他社モデルの数値は削除し、<strong>Gemini 3 Pro 72.1%（前世代2.5 Proは54.5%）</strong>のみ掲載に変更</li>
+    </ul>
+  </div>
+
+  <!-- Audience box -->
+  <div class="audience">
+    <div class="audience-title">この資料の想定活用シーン</div>
+    <div class="audience-grid">
+      <div class="audience-item">
+        <strong>顧客・クライアント向け提案時</strong>
+        Geminiの導入検討やプラン選定の判断材料として。プランごとの機能差と制約を1ファイルで把握できます。
+      </div>
+      <div class="audience-item">
+        <strong>Gemini研修の講師向け</strong>
+        受講者に「何ができて何ができないか」を正確に伝えるための情報ソースとして。制約情報の事実確認にご利用ください。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================= -->
+<!-- TOC -->
+<!-- ============================================================= -->
+<div class="toc">
+  <div class="toc-subtitle">— TABLE OF CONTENTS —</div>
+  <div class="toc-title">目次</div>
+
+  <div class="toc-group">
+    <div class="toc-group-title"><span class="part-num">PART 1</span>プランの全体像</div>
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">01</span><a href="#s1">4つのプラン・料金・ストレージ・家族共有</a></div>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-title"><span class="part-num">PART 2</span>基本の制約</div>
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">02</span><a href="#s2">画像生成の制限</a></div>
+      <div class="toc-item"><span class="toc-num">03</span><a href="#s3">ファイルアップロード</a></div>
+      <div class="toc-item"><span class="toc-num">04</span><a href="#s4">コンテキストウィンドウ</a></div>
+      <div class="toc-item"><span class="toc-num">05</span><a href="#s5">モデルの種類と使用量の仕組み</a></div>
+      <div class="toc-item"><span class="toc-num">06</span><a href="#s6">その他の主要機能</a></div>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-title"><span class="part-num">PART 3</span>詳細機能ガイド</div>
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">07</span><a href="#s7">カスタム指示機能</a></div>
+      <div class="toc-item"><span class="toc-num">08</span><a href="#s8">チャット横断のメモリー</a></div>
+      <div class="toc-item"><span class="toc-num">09</span><a href="#s9">ハルシネーション確率</a></div>
+      <div class="toc-item"><span class="toc-num">10</span><a href="#s10">チャット履歴の削除</a></div>
+      <div class="toc-item"><span class="toc-num">11</span><a href="#s11">動画生成の詳細</a></div>
+      <div class="toc-item"><span class="toc-num">12</span><a href="#s12">音楽生成の詳細</a></div>
+      <div class="toc-item"><span class="toc-num">13</span><a href="#s13">Excelファイル出力</a></div>
+      <div class="toc-item"><span class="toc-num">14</span><a href="#s14">ファイル読み取り精度</a></div>
+      <div class="toc-item"><span class="toc-num">15</span><a href="#s15">データの学習利用</a></div>
+      <div class="toc-item"><span class="toc-num">16</span><a href="#s16">肖像権・著作権</a></div>
+      <div class="toc-item"><span class="toc-num">17</span><a href="#s17">Gems（カスタムAI）</a></div>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-title"><span class="part-num">PART 4</span>Pro特有の追加価値</div>
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">18</span><a href="#s18">Google Apps統合・Flow・NotebookLM・学生特典</a></div>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-title"><span class="part-num">PART 5</span>補足情報</div>
+    <div class="toc-list">
+      <div class="toc-item"><span class="toc-num">19</span><a href="#s19">Google AI Ultra プラン情報</a></div>
+      <div class="toc-item"><span class="toc-num">20</span><a href="#s20">全体サマリー・プラン選定ガイド</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PART 1 -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART 1</div>
+    <div class="part-title">プランの全体像</div>
+    <p class="part-desc">まずは4つのプランの料金・容量・特典を把握しましょう。本資料では主に無料版とProプランを解説します。</p>
+  </div>
+</div>
+
+<section id="s1">
+  <div class="section-head">
+    <div class="section-num">01</div>
+    <span class="section-tag">PLAN OVERVIEW</span>
+  </div>
+  <h2>4つのプラン・料金・ストレージ・家族共有</h2>
+  <p class="lede">Geminiアプリには4つのプランがあり、使用量・ストレージ・特典が段階的に拡張されていきます。<strong>2026年5月のGoogle I/O 2026で料金プランが再編</strong>され、AI Plusは値下げ（¥1,200→¥725）、Ultraは2段階（¥14,500／¥32,000）構成になりました。</p>
+
+  <div class="glossary">
+    <strong>「使用量上限」の新しい考え方（2026年5月〜）</strong>
+    <div class="def">以前の「1日◯回まで」という回数制から、<strong>無料版を基準にした倍率</strong>での表記に変わりました。プランが上がるほど、より多く・より高性能なモデルを使えるイメージです。</div>
+    <div class="ex">無料版＝1倍 ／ AI Plus＝2倍 ／ AI Pro＝4倍 ／ AI Ultra＝最大20倍。詳しい仕組みはセクション05で解説します。</div>
+  </div>
+
+  <h3>プラン別 料金・ストレージ比較</h3>
+  <div class="pricing-grid">
+
+    <div class="pricing-card free">
+      <div class="pc-tier">FREE</div>
+      <div class="pc-name">無料プラン</div>
+      <div class="pc-price">¥0</div>
+      <div class="pc-price-sub">誰でも利用可能</div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>15GB</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>コンテキスト <strong>32K</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ファミリー共有 ✕</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>お試し用途に</span></div>
+    </div>
+
+    <div class="pricing-card plus">
+      <div class="pc-tier">PLUS</div>
+      <div class="pc-name">Google AI Plus</div>
+      <div class="pc-price">¥725</div>
+      <div class="pc-price-sub">月額（税込）<span class="tag tag-update" style="margin-left:4px;font-size:9px;padding:0 5px;">DOWN</span></div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>400GB</strong><span class="tag tag-update" style="margin-left:4px;font-size:9px;padding:0 5px;">UP</span></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>使用量 <strong>無料版の2倍</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>コンテキスト <strong>128K</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ファミリー共有 <strong>最大6人</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>週数回の利用向け</span></div>
+    </div>
+
+    <div class="pricing-card pro">
+      <div class="pc-featured">STANDARD</div>
+      <div class="pc-tier">PRO</div>
+      <div class="pc-name">Google AI Pro</div>
+      <div class="pc-price">¥2,900</div>
+      <div class="pc-price-sub">月額（税込）</div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>5TB</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>使用量 <strong>無料版の4倍</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>コンテキスト <strong>100万</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ファミリー共有 <strong>最大6人</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Flow用AIクレジット <strong>月1,000</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>業務利用のスタンダード</span></div>
+    </div>
+
+    <div class="pricing-card ultra">
+      <div class="pc-tier">ULTRA</div>
+      <div class="pc-name">Google AI Ultra</div>
+      <div class="pc-price">¥14,500〜</div>
+      <div class="pc-price-sub">月額（2段階構成）<span class="tag tag-update" style="margin-left:4px;font-size:9px;padding:0 5px;">NEW</span></div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>20TB〜</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>使用量 <strong>Proの5倍／20倍</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>コンテキスト <strong>100万</strong></span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Deep Think／Project Genie対応</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>最先端機能を使い倒す人向け</span></div>
+    </div>
+
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">ファミリー共有で実質コストを抑える</div>
+    <p>Proプランは最大6人（契約者本人含む）でAI機能とストレージを共有できます。家族やチームで割ると<strong>1人あたり約483円/月</strong>に。血縁・同居関係は問われないため、小規模チームでの契約も現実的な選択肢です。</p>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">プラン選びの目安</div>
+    <p><strong>まずは試す</strong>なら無料版、<strong>週に数回利用</strong>ならPlus、<strong>毎日業務で使う</strong>ならPro、<strong>動画生成・Deep Think・Project Genieもフル活用</strong>ならUltra。大多数のビジネスユーザーはProで必要十分です。</p>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">料金は変動・キャンペーンに注意</div>
+    <p>本資料の料金は<strong>2026年6月14日時点でGoogle公式サイト（日本）に表示されている価格</strong>です。Geminiの料金・特典は頻繁に改定され、初回割引などのキャンペーン価格が適用される場合もあります。契約前に必ず<strong>Google One / Geminiの公式ページで最新の金額</strong>をご確認ください。</p>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- PART 2 -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART 2</div>
+    <div class="part-title">基本の制約</div>
+    <p class="part-desc">機能別に「どれくらい使えるか」をプランごとに比較します。実務で最も気になる上限の早見表です。</p>
+  </div>
+</div>
+
+<!-- Section 2: Image -->
+<section id="s2">
+  <div class="section-head">
+    <div class="section-num">02</div>
+    <span class="section-tag">IMAGE GENERATION</span>
+  </div>
+  <h2>画像生成：1日に作れる枚数</h2>
+  <p class="lede">Geminiの画像生成は <strong>Nano Banana 2</strong>（標準・高速）と <strong>Nano Banana Pro</strong>（高品質）の2モデル構成。それぞれに別々の上限があります。</p>
+
+  <div class="glossary">
+    <strong>Nano Banana 2 と Nano Banana Pro</strong>
+    <div class="def">どちらもGoogleの画像生成エンジン。<strong>Nano Banana 2</strong>は日常使いの高速モデル、<strong>Nano Banana Pro</strong>は高品質・高解像度モデルです。Nano Banana Proは正式名称「Gemini 3 Pro Image」として<strong>2026年6月に正式版（一般提供）</strong>になり、文字の描画精度に強みがあります。</div>
+    <div class="ex">例：SNS投稿用の画像 → Nano Banana 2／文字入りのポスターやクライアント提出資料 → Nano Banana Pro</div>
+  </div>
+
+  <h3>プラン別の1日あたり生成上限（目安）</h3>
+  <p class="muted" style="font-size:13px;">※下表は第三者の検証や移行前の公表値にもとづく<strong>参考の目安</strong>です。2026年5月以降は後述のコンピュート使用量モデルに移行しており、混雑状況やプロンプトの内容によって実際に作れる枚数は変動します。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>プラン</th>
+          <th class="num">Nano Banana 2（標準）</th>
+          <th class="num">Nano Banana Pro（高品質）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="plan-pill free">Free</span></td>
+          <td class="num">20枚 / 日</td>
+          <td class="num"><span class="dash">—</span></td>
+        </tr>
+        <tr>
+          <td><span class="plan-pill plus">Plus</span></td>
+          <td class="num">50枚 / 日</td>
+          <td class="num">50枚 / 日</td>
+        </tr>
+        <tr>
+          <td><span class="plan-pill pro">Pro</span></td>
+          <td class="num"><strong>100枚 / 日</strong></td>
+          <td class="num"><strong>100枚 / 日</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">リセットのタイミング</div>
+    <p>画像生成の枠は<strong>定期的にリセット</strong>されます。基準は太平洋時間（PT）で、日本時間では<strong>夕方16〜17時頃</strong>に復活するイメージです。Nano Banana Proの枠を超えた場合は、Nano Banana 2 に切り替えて生成を続けられます。</p>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">生成禁止カテゴリー（2026年2月強化）</div>
+    <p>実在の人物（公人・有名人）、版権キャラクター、顔交換（Face swap）、実在人物の衣装交換、金融文書の改ざん、これらに該当する画像はポリシー上生成がブロックされます。</p>
+  </div>
+</section>
+
+<!-- Section 3: File Upload -->
+<section id="s3">
+  <div class="section-head">
+    <div class="section-num">03</div>
+    <span class="section-tag">FILE UPLOAD</span>
+  </div>
+  <h2>ファイルアップロード：件数・容量・長さ</h2>
+  <p class="lede">全プラン共通の「ハード上限」と、プランごとに異なる「長さ上限」があります。</p>
+
+  <h3>全プラン共通：ファイル件数とサイズ</h3>
+  <div class="file-grid">
+    <div class="file-card">
+      <span class="icon">📁</span>
+      <div class="ftype">1プロンプトあたりの件数</div>
+      <div class="fval">10<span>ファイルまで</span></div>
+      <div class="fnote">1回のメッセージで同時にアップできる上限</div>
+    </div>
+    <div class="file-card">
+      <span class="icon">📄</span>
+      <div class="ftype">通常ファイルのサイズ</div>
+      <div class="fval">100<span>MB / 1ファイル</span></div>
+      <div class="fnote">PDF・画像・テキスト・Officeファイル等</div>
+    </div>
+    <div class="file-card">
+      <span class="icon">🎬</span>
+      <div class="ftype">動画ファイルのサイズ</div>
+      <div class="fval">2<span>GB / 1ファイル</span></div>
+      <div class="fnote">動画だけは特別枠で大容量に対応</div>
+    </div>
+    <div class="file-card">
+      <span class="icon">💻</span>
+      <div class="ftype">コード/GitHubリポジトリ</div>
+      <div class="fval">5,000<span>ファイル・計100MB</span></div>
+      <div class="fnote">1チャットにつき1フォルダ（or 1リポジトリ）</div>
+    </div>
+  </div>
+
+  <h3>動画・音声の「長さ」上限（プラン別）</h3>
+  <p>サイズだけでなく「長さ」にも制限があり、ここはプランで大きな差がつきます。</p>
+
+  <div class="media-compare">
+    <div class="media-card">
+      <div class="mc-head"><span class="icon-lg">🎥</span>動画（mp4など）の長さ</div>
+      <div class="duration-row">
+        <span class="d-label">無料</span>
+        <span class="d-value">合計 5分</span>
+      </div>
+      <div class="duration-row">
+        <span class="d-label">Pro</span>
+        <span class="d-value emphasis">合計 1時間</span>
+      </div>
+    </div>
+    <div class="media-card">
+      <div class="mc-head"><span class="icon-lg">🎵</span>音声（mp3など）の長さ</div>
+      <div class="duration-row">
+        <span class="d-label">無料</span>
+        <span class="d-value">合計 10分</span>
+      </div>
+      <div class="duration-row">
+        <span class="d-label">Pro</span>
+        <span class="d-value emphasis">合計 3時間</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">実務でのインパクト</div>
+    <p>会議の録画や講義動画を読み込ませたい場合、<strong>Pro以上が実質必須</strong>です。無料版の5分・10分はかなり短いので、業務利用なら有料化を前提に検討してください。</p>
+  </div>
+</section>
+
+<!-- Section 4: Context Window -->
+<section id="s4">
+  <div class="section-head">
+    <div class="section-num">04</div>
+    <span class="section-tag">CONTEXT WINDOW</span>
+  </div>
+  <h2>コンテキストウィンドウ：一度に読める分量</h2>
+  <p class="lede">「一度にどれだけの情報を理解できるか」を決める容量のことです。プラン差が大きいポイント。</p>
+
+  <div class="glossary">
+    <strong>コンテキストウィンドウ</strong>
+    <div class="def">AIが一度に「覚えていられる・読み込める」情報量のこと。トークン（≒文字のかたまり）という単位で計られます。容量が大きいほど長い文書を丸ごと理解できます。</div>
+    <div class="ex">例：100万トークン＝本にして約1,500ページ分、またはコード約3万行分</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>プラン</th>
+          <th class="num">コンテキスト容量</th>
+          <th>ざっくり換算</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="plan-pill free">Free</span></td>
+          <td class="num">32,000 トークン</td>
+          <td class="muted" style="font-size:13px;">約50ページ分</td>
+        </tr>
+        <tr>
+          <td><span class="plan-pill plus">Plus</span></td>
+          <td class="num">128,000 トークン</td>
+          <td class="muted" style="font-size:13px;">約200ページ分</td>
+        </tr>
+        <tr>
+          <td><span class="plan-pill pro">Pro</span></td>
+          <td class="num"><strong>1,000,000 トークン</strong></td>
+          <td class="muted" style="font-size:13px;">約1,500ページ分</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">大きな文書を扱うならPro推奨</div>
+    <p>無料版の32,000トークンは約50ページ分。営業資料1部を読ませるのも厳しいボリュームです。大きなPDFや長文を扱う業務なら<strong>Proの100万トークン</strong>が実質必須です。</p>
+  </div>
+</section>
+
+<!-- Section 5: Model Prompts -->
+<section id="s5">
+  <div class="section-head">
+    <div class="section-num">05</div>
+    <span class="section-tag">MODEL MODES</span>
+  </div>
+  <h2>モデルの種類と使用量の仕組み（2026年5月刷新）</h2>
+  <p class="lede"><span class="tag tag-update">UPDATED</span>2026年5月のGoogle I/O 2026で、使用量の数え方が<strong>「1日◯回」から「コンピュート使用量モデル」へ</strong>大きく変わりました。あわせて新モデル<strong>Gemini 3.5世代</strong>が登場しています。</p>
+
+  <h3>① 現在のモデルのラインナップ</h3>
+  <div class="glossary">
+    <strong>モデルとは</strong>
+    <div class="def">回答を生み出すAIの「頭脳」のこと。用途に応じて高速タイプと高性能タイプが用意されており、Geminiアプリの入力欄上部で切り替えられます。</div>
+    <div class="ex">迷ったら「高速タイプ」で十分。難しい調査や数学・コーディングのときだけ「Pro（推論）」に切り替えるのが基本です。</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>モデル</th><th>位置づけ</th><th>無料版</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="label-cell">Gemini 3.5 Flash <span class="tag tag-new">NEW</span></span><span class="muted">I/O 2026で一般提供開始。最速・最新の標準モデル</span></td>
+          <td class="muted" style="display:table-cell;">日常タスク・要約・ブレストの主力</td>
+          <td><span class="tag tag-yes">利用可</span></td>
+        </tr>
+        <tr>
+          <td><span class="label-cell">Gemini 3 Flash</span><span class="muted">高速タイプの定番</span></td>
+          <td class="muted" style="display:table-cell;">会話・高速応答</td>
+          <td><span class="tag tag-yes">利用可</span></td>
+        </tr>
+        <tr>
+          <td><span class="label-cell">Gemini 3.1 Pro（推論）</span><span class="muted">複雑な数学・コーディング・分析向け</span></td>
+          <td class="muted" style="display:table-cell;">じっくり考える高性能タイプ</td>
+          <td><span class="tag tag-partial">制限あり</span></td>
+        </tr>
+        <tr>
+          <td><span class="label-cell">Gemini 3.5 Pro <span class="tag tag-new">NEW</span></span><span class="muted">I/O 2026発表、2026年6月に順次提供</span></td>
+          <td class="muted" style="display:table-cell;">最上位の推論モデル</td>
+          <td><span class="dash">—</span></td>
+        </tr>
+        <tr>
+          <td><span class="label-cell">Gemini 3 Flash-Lite</span><span class="muted">上限到達時の受け皿</span></td>
+          <td class="muted" style="display:table-cell;">枠を使い切った後も会話を継続できる</td>
+          <td><span class="tag tag-yes">利用可</span></td>
+        </tr>
+        <tr>
+          <td><span class="label-cell">Deep Think</span><span class="muted">じっくり並列で深く考える特別モード</span></td>
+          <td class="muted" style="display:table-cell;">Ultra限定の高度な推論</td>
+          <td><span class="dash">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>② 使用量の数え方：「コンピュート使用量モデル」</h3>
+  <div class="glossary">
+    <strong>コンピュート使用量モデル</strong>
+    <div class="def">「何回送ったか」ではなく、<strong>プロンプトの複雑さ・使う機能・チャットの長さ</strong>などから決まる“処理の重さ”をもとに使用量をカウントする方式。重い処理ほど枠を多く消費します。</div>
+    <div class="ex">例：短い質問は軽く消費、長い資料の要約や画像生成・Deep Researchは重く消費する、というイメージです。</div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">リフレッシュ</div><div class="st-value gold">5<span class="unit">時間ごと</span></div><div class="st-note">短時間で枠が回復</div></div>
+    <div class="stat-card"><div class="st-label">上限の単位</div><div class="st-value sub">週次キャップ</div><div class="st-note">週単位の総枠も設定</div></div>
+    <div class="stat-card"><div class="st-label">上限到達後</div><div class="st-value sub">Flash-Lite<br>で継続</div><div class="st-note">会話は止まらない</div></div>
+    <div class="stat-card"><div class="st-label">公式の日次回数</div><div class="st-value sub">非公表</div><div class="st-note">倍率で提示</div></div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">仕組みは「2段ゲート」</div>
+    <p>① <strong>5時間ごと</strong>に枠がリフレッシュされ、② それとは別に<strong>週単位の総量上限</strong>があります。短時間に集中して使うと5時間枠に当たり、長期間ヘビーに使うと週次上限に当たる、という二段構えです。どちらかに達すると <strong>Gemini 3 Flash-Lite</strong> に切り替わって会話を続けられます。</p>
+  </div>
+
+  <h3>③ プラン別の使用量（無料版を基準とした倍率）</h3>
+  <p>公式は具体的な「1日◯回」を公表しなくなり、<strong>無料版を1倍とした相対倍率</strong>で各プランの使用量を示しています。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>プラン</th><th class="num">使用量の倍率</th><th>イメージ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="plan-pill free">Free</span></td><td class="num">1倍（基準）</td><td class="muted" style="font-size:13px;">お試し・軽い利用</td></tr>
+        <tr><td><span class="plan-pill plus">Plus</span></td><td class="num">無料版の2倍</td><td class="muted" style="font-size:13px;">週数回の利用</td></tr>
+        <tr><td><span class="plan-pill pro">Pro</span></td><td class="num"><strong>無料版の4倍</strong></td><td class="muted" style="font-size:13px;">毎日の業務利用</td></tr>
+        <tr><td><span class="plan-pill ultra">Ultra</span></td><td class="num"><strong>Proの5倍／20倍</strong></td><td class="muted" style="font-size:13px;">最先端機能を使い倒す</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">第三者が公表する「1日◯回」の数値について</div>
+    <p>移行前の公表値や独立検証をもとに、<strong>Pro＝思考300回/日・Pro 3.1モード100回/日</strong>といった目安が今も各所で紹介されています。これらは<strong>あくまで参考値</strong>で、現在の公式仕様（倍率＋週次）とは数え方が異なります。本資料でも一部のセクションで利便性のため目安値を併記しますが、<strong>正確な上限はアプリ内の使用量表示でご確認ください</strong>。</p>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">上限に達しても会話は止まらない</div>
+    <p>Pro／推論モデルの枠を使い切っても、<strong>同じチャットのまま Flash-Lite に切り替えて会話を続けられます</strong>。完全に使えなくなるわけではないのでご安心ください。枠は5時間ごとに回復します。</p>
+  </div>
+</section>
+
+<!-- Section 6: Other Features -->
+<section id="s6">
+  <div class="section-head">
+    <div class="section-num">06</div>
+    <span class="section-tag">OTHER FEATURES</span>
+  </div>
+  <h2>その他の主要機能の上限</h2>
+  <p class="lede">Deep Research、動画・音楽生成、音声解説、予約アクションなど、よく使われる機能の上限をまとめます。</p>
+  <p class="muted" style="font-size:13px;">※以下の「◯/日」「◯/月」は<strong>移行前の公表値・第三者検証にもとづく参考の目安</strong>です。現在はコンピュート使用量モデル（セクション05）が適用され、実際の利用可能数は変動します。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>機能</th>
+          <th class="num">無料</th>
+          <th class="num">Pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="label-cell">Deep Research</span>
+            <span class="muted">出典付き調査レポート生成</span>
+          </td>
+          <td class="num">5 / 月</td>
+          <td class="num">20 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">音声解説（Audio Overviews）<span class="tag tag-new">NEW</span></span>
+            <span class="muted">ドキュメントをポッドキャスト風音声に変換</span>
+          </td>
+          <td class="num" colspan="2" style="text-align: center;">全プラン 20 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">動画生成（Veo 3.1）</span>
+            <span class="muted">テキストから8秒動画を生成</span>
+          </td>
+          <td class="num"><span class="dash">—</span></td>
+          <td class="num">3 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">音楽生成（30秒）</span>
+            <span class="muted">テキストから楽曲生成</span>
+          </td>
+          <td class="num">10 / 日</td>
+          <td class="num">50 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">スライド生成</span>
+            <span class="muted">プレゼン資料をAIで作成</span>
+          </td>
+          <td class="num">20 / 日</td>
+          <td class="num"><span class="check-on">上限ほぼなし</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">画面の操作代行</span>
+            <span class="muted">画面を見ながら操作代行</span>
+          </td>
+          <td class="num">5 / 日</td>
+          <td class="num">20 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">動的ビュー</span>
+            <span class="muted">インタラクティブな表示</span>
+          </td>
+          <td class="num">25 / 日</td>
+          <td class="num">250 / 日</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label-cell">予約アクション<span class="tag tag-new">NEW</span></span>
+            <span class="muted">スケジュール設定して定期実行</span>
+          </td>
+          <td class="num"><span class="dash">—</span></td>
+          <td class="num"><span class="muted" style="margin:0;">Plusから制限付きアクセス</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="new-feature">
+    <h4>音声解説・予約アクションとは？</h4>
+    <p><strong>音声解説：</strong>アップロードした資料の内容を、2人のAIパーソナリティが会話する形式のポッドキャスト音声に変換する機能。通勤時間に資料を「聴く」ことができます。</p>
+    <p><strong>予約アクション：</strong>「毎朝9時にメールを要約して」「毎週月曜日にニュースをまとめて」など、定期実行の指示を事前登録できる機能。Plusから利用可能。</p>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- PART 3 -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART 3</div>
+    <div class="part-title">詳細機能ガイド</div>
+    <p class="part-desc">実務でよく質問される項目を深掘り。研修の講義や顧客説明にそのまま使える情報を集めました。</p>
+  </div>
+</div>
+
+<!-- Section 7: Custom Instructions -->
+<section id="s7">
+  <div class="section-head">
+    <div class="section-num">07</div>
+    <span class="section-tag">CUSTOM INSTRUCTIONS</span>
+  </div>
+  <h2>カスタム指示機能はあるか？</h2>
+  <p class="lede"><span class="tag tag-update">UPDATED</span><strong>2025年10月</strong>に「パーソナル コンテキスト」として正式展開、<strong>2026年1月</strong>に「Personal Intelligence」として機能強化されました。無料版・Proともに利用可能です。</p>
+
+  <div class="glossary">
+    <strong>カスタム指示</strong>
+    <div class="def">AIに対して「あなたは〇〇の役割で、常に〇〇のトーンで返答してください」と事前に設定しておく機能。ChatGPTの「Custom Instructions」に相当します。一度登録すれば、すべての新規チャットに反映されます。</div>
+    <div class="ex">例：「私は個人事業主でです・ます調を好みます。専門用語には解説を加えてください」</div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-card free">
+      <span class="cc-badge free">Free</span>
+      <div class="cc-name">無料版</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">カスタム指示機能は<strong>利用可能</strong></div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">全ユーザーに段階的に提供中</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">オン・オフの切替可能</div></div>
+    </div>
+    <div class="compare-card pro">
+      <span class="cc-badge pro">Pro</span>
+      <div class="cc-name">Google AI Pro</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">無料版と同じ機能を<strong>フル活用可能</strong></div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Personal Intelligence機能と連携</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Gmail・Drive等の履歴も活用可能</div></div>
+    </div>
+  </div>
+
+  <h3>設定手順</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">gemini.google.comにアクセス</div><div class="step-desc">画面上部のメニュー ▸ 設定とヘルプ を開く</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">「パーソナル インテリジェンス」をタップ</div><div class="step-desc">その中の「Geminiへのカスタム指示」を選択</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">指示内容を入力して保存</div><div class="step-desc">役割・文体・目的・NG事項などを自由に記述</div></div></div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">カスタム指示は1アカウントに1セットのみ</div>
+    <p>カスタム指示は<strong>1つのGoogleアカウントにつき1セット</strong>しか設定できません。複数の設定を使い分けたい場合は、Part 3-17で解説する<strong>Gems（カスタムAI）</strong>を併用するか、用途別に別Googleアカウントを使うのがおすすめです。</p>
+  </div>
+
+  <div class="summary-box">
+    <p>無料版・Pro版どちらでもカスタム指示機能は<strong>使えます</strong>。プランによる機能差はほぼありません。1アカウント1セットの制約があるため、多用途に使うならGemsの併用を検討してください。</p>
+  </div>
+</section>
+
+<!-- Section 8: Memory -->
+<section id="s8">
+  <div class="section-head">
+    <div class="section-num">08</div>
+    <span class="section-tag">MEMORY</span>
+  </div>
+  <h2>チャットが変わっても記憶してくれるか？</h2>
+  <p class="lede">「メモリー」機能として提供されています。2026年3月に「過去のチャット」から「メモリー（memory）」に名称変更されました。無料・有料とも利用可能です。</p>
+
+  <h3>メモリー機能は2つの仕組みで構成</h3>
+  <div class="compare">
+    <div class="compare-card" style="border-top: 3px solid var(--blue);">
+      <span class="cc-badge plus">保存済みの情報</span>
+      <div class="cc-name">明示的に覚えさせる</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">「私の職業は〇〇」などを<strong>手動で記憶</strong>させる</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">編集・削除が簡単</div></div>
+    </div>
+    <div class="compare-card" style="border-top: 3px solid var(--purple);">
+      <span class="cc-badge ultra">コンテキスト参照</span>
+      <div class="cc-name">過去チャットから参照</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">過去会話を<strong>AIが読み取り</strong>パーソナライズ</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">文体や好みも学習</div></div>
+    </div>
+  </div>
+
+  <h3>プラン別の違い</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>項目</th><th>無料版</th><th>Google AI Pro</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-cell">メモリー機能</td>
+          <td><span class="tag tag-yes">利用可能</span><span class="muted">段階的ロールアウト</span></td>
+          <td><span class="tag tag-yes">利用可能</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">デフォルト設定</td>
+          <td>オン（一部地域を除く）</td>
+          <td>オン</td>
+        </tr>
+        <tr>
+          <td class="label-cell">一時チャット（記憶しない）</td>
+          <td><span class="tag tag-yes">利用可能</span><span class="muted">72時間で破棄</span></td>
+          <td><span class="tag tag-yes">利用可能</span><span class="muted">72時間で破棄</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">他AIからのメモリインポート</td>
+          <td><span class="tag tag-yes">利用可能</span><span class="muted">ZIP最大5GB</span></td>
+          <td><span class="tag tag-yes">利用可能</span><span class="muted">ZIP最大5GB</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">実務のヒント</div>
+    <p>過去の会話で「東京在住で頻繁に出張する」と伝えていれば、後から週末プランを聞いたとき移動の疲れを考慮した提案が得られます。一貫した文体の文章生成にも便利です。</p>
+  </div>
+
+  <div class="summary-box">
+    <p>チャットが変わっても<strong>記憶してくれます</strong>。プラン問わず利用可能。プライバシー重視なら「一時チャット」を使い分けるのがおすすめです。</p>
+  </div>
+</section>
+
+<!-- Section 9: Hallucination -->
+<section id="s9">
+  <div class="section-head">
+    <div class="section-num">09</div>
+    <span class="section-tag">HALLUCINATION</span>
+  </div>
+  <h2>ハルシネーションはどれくらい起きるか？</h2>
+  <p class="lede"><span class="tag tag-update">UPDATED</span>2026年のGemini 3系は事実性が大きく改善し、Gemini 3 Proは事実性ベンチマーク（SimpleQA Verified）で公開当時のトップ級スコアを記録しました。5月のGoogle I/O 2026で <strong>3.5世代</strong> も登場しています。ただし<strong>どのモデルでも誤り（ハルシネーション）は完全にはゼロになりません</strong>。</p>
+
+  <div class="glossary">
+    <strong>ハルシネーション</strong>
+    <div class="def">AIがもっともらしい嘘をつく現象。存在しない事実や誤情報を自信満々に生成してしまうこと。LLMが確率的に「次に来そうな言葉」を予測する仕組みに起因する構造的な問題です。</div>
+    <div class="ex">例：実在しない法律の条文を引用する、架空の人物の業績を作り出す、古い情報を最新として答える</div>
+  </div>
+
+  <h3>事実性ベンチマーク：SimpleQA Verified（Google公式公表値）</h3>
+  <div class="bar-chart">
+    <h4>SimpleQA Verified（短文の事実正答率）</h4>
+    <div class="bc-subtitle">Score: 高いほど事実に忠実（Google DeepMind 公表値）</div>
+    <div class="bar-row">
+      <span class="bar-label">Gemini 3 Pro<span class="tag-best">最新世代</span></span>
+      <div class="bar-track"><div class="bar-fill gemini3x" style="width: 72.1%;">72.1%</div></div>
+      <span class="bar-value">72.1%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Gemini 2.5 Pro（前世代）</span>
+      <div class="bar-track"><div class="bar-fill old" style="width: 54.5%;">54.5%</div></div>
+      <span class="bar-value">54.5%</span>
+    </div>
+  </div>
+  <p class="tiny">※ 出典：Google DeepMind 公式（FACTS Benchmark Suite 解説）。<strong>Gemini 3 Pro は 72.1% で、前世代の 54.5% から事実性が大きく向上</strong>しました。なお<strong>Gemini 3.1 Pro</strong>は推論系（GPQA Diamond 94.3%・ARC-AGI-2 77.1%）で公式値が公表されていますが、<strong>SimpleQA Verified の公式スコアは公表されていません</strong>。他社モデルとの横並び比較も、各社の測定条件が異なるため本資料では掲載していません。</p>
+
+  <div class="callout note">
+    <div class="c-title">「事実性が高い＝ハルシネーションが無い」ではない</div>
+    <p>SimpleQA Verified は<strong>短い事実質問</strong>に対する正答率の指標です。Gemini 3 Pro でも約3割は誤りを含む可能性があり、<strong>長文・複雑な視覚タスク・ツール連携時にはハルシネーションが発生</strong>します。存在しないパッケージ名や数値を作り出すケースも報告されています。</p>
+  </div>
+
+  <h3>無料版とProで精度は変わるか</h3>
+  <p>無料版は標準モデル（Gemini 3.5 Flash など）、Proはより高性能な推論モデル（Gemini 3.1 Pro）をより多く使えるため、<strong>難しい質問ほどProの方が正確</strong>になりやすい傾向があります。第三者の小規模テストでも、無料版よりProの方が正答率が高い結果が報告されています（測定条件により変動するため、あくまで参考）。</p>
+
+  <div class="callout warn">
+    <div class="c-title">業務利用では人によるファクトチェックが必須</div>
+    <p>どのプラン・どのモデルでも、<strong>ハルシネーションを完全にゼロにはできません</strong>。重要な数値・固有名詞・日付・法令などは、必ず一次情報で裏取りしてください。プロンプトに「出典（URL）を示して」と加えると検証しやすくなります。</p>
+  </div>
+
+  <h3>ハルシネーションが起きやすい質問</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">古い情報</div><div class="st-value sub">学習データにない<br>最新の出来事</div></div>
+    <div class="stat-card"><div class="st-label">マイナーな対象</div><div class="st-value sub">無名人物・<br>小規模企業の詳細</div></div>
+    <div class="stat-card"><div class="st-label">複雑な条件</div><div class="st-value sub">複数条件を<br>組み合わせた質問</div></div>
+    <div class="stat-card"><div class="st-label">数値・固有名詞</div><div class="st-value sub">日時・数量・<br>人名・企業名</div></div>
+  </div>
+
+  <div class="summary-box">
+    <p>最新のGeminiは<strong>事実性が大きく向上</strong>していますが、ハルシネーションが<strong>完全にゼロになるわけではありません</strong>。プロンプトに「出典を示して」と指示し、重要な情報は必ず一次情報で裏取りをしてください。</p>
+  </div>
+</section>
+
+<!-- Section 10: History -->
+<section id="s10">
+  <div class="section-head">
+    <div class="section-num">10</div>
+    <span class="section-tag">HISTORY</span>
+  </div>
+  <h2>チャット履歴は削除できるか？</h2>
+  <p class="lede">手動削除・期間指定での削除・一括削除のすべてが可能です。プラン問わず利用できます。</p>
+
+  <h3>削除方法は3種類</h3>
+  <div class="triple">
+    <div class="compare-card" style="border-top: 3px solid var(--blue);">
+      <div class="cc-name" style="font-size: 15px;">1. 個別削除</div>
+      <p style="font-size: 13px;">特定のチャット1件ずつ削除</p>
+      <p style="font-size: 12px; color: var(--ink-light); margin-bottom: 0;">「最近のチャット」画面で各チャットの ⋮ から「削除」</p>
+    </div>
+    <div class="compare-card" style="border-top: 3px solid var(--gold);">
+      <div class="cc-name" style="font-size: 15px;">2. 期間指定で削除</div>
+      <p style="font-size: 13px;">設定した期間の経過で消える</p>
+      <p style="font-size: 12px; color: var(--ink-light); margin-bottom: 0;"><strong>3ヶ月 / 18ヶ月（デフォルト） / 36ヶ月 / 削除しない</strong>から選択</p>
+    </div>
+    <div class="compare-card" style="border-top: 3px solid var(--red);">
+      <div class="cc-name" style="font-size: 15px;">3. 全削除</div>
+      <p style="font-size: 13px;">一括でまとめて削除</p>
+      <p style="font-size: 12px; color: var(--ink-light); margin-bottom: 0;">「Geminiアプリアクティビティ」からすべて削除</p>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">削除しても反映に時間差がある</div>
+    <p>チャットを削除しても、Geminiがその内容をパーソナライズに使わなくなるまで<strong>しばらく時間がかかる</strong>場合があります。また、連携アプリ経由で情報が残ることもあるため、完全に消したい場合は連携解除も併せて行ってください。</p>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>削除できます</strong>。保存期間の設定（デフォルト18ヶ月）を短く設定しておけば、プライバシー管理が簡単になります。</p>
+  </div>
+</section>
+
+<!-- Section 11: Video Generation -->
+<section id="s11">
+  <div class="section-head">
+    <div class="section-num">11</div>
+    <span class="section-tag">VIDEO GENERATION</span>
+  </div>
+  <h2>動画生成の詳細スペックと制約</h2>
+  <p class="lede"><span class="tag tag-update">UPDATED</span>2026年6月時点、Geminiアプリ内では<strong>Veo 3.1</strong>モデルで<strong>8秒固定・720p固定・16:9固定</strong>の動画が作れます。無料版では利用できません。Google I/O 2026では新しい動画系モデル<strong>Gemini Omni</strong>も発表され、Flowなどへ順次展開されています。</p>
+
+  <div class="compare">
+    <div class="compare-card free">
+      <span class="cc-badge free">Free</span>
+      <div class="cc-name">無料版</div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text"><strong>動画生成は利用不可</strong></div></div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">Google AIプラン加入が必須</div></div>
+    </div>
+    <div class="compare-card pro">
+      <span class="cc-badge pro">Pro</span>
+      <div class="cc-name">Google AI Pro</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Veo 3.1 Fast（プレビュー）を利用可能</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text"><strong>1日3本まで</strong>生成可能</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Flow用AIクレジット <strong>月1,000</strong>付属</div></div>
+    </div>
+  </div>
+
+  <h3>生成される動画の仕様（Geminiアプリ）</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">長さ</div><div class="st-value gold">8<span class="unit">秒</span></div><div class="st-note">固定（延長不可）</div></div>
+    <div class="stat-card"><div class="st-label">解像度</div><div class="st-value gold">720<span class="unit">p</span></div><div class="st-note"><strong>固定</strong>（1280×720）<br>API版は4Kも可</div></div>
+    <div class="stat-card"><div class="st-label">アスペクト比</div><div class="st-value sub">16 : 9</div><div class="st-note"><strong>固定</strong>（横向きのみ）</div></div>
+    <div class="stat-card"><div class="st-label">ファイル形式</div><div class="st-value sub">MP4</div><div class="st-note">ダウンロード可能</div></div>
+    <div class="stat-card"><div class="st-label">音声</div><div class="st-value sub">対応</div><div class="st-note">プロンプトでリクエスト可</div></div>
+    <div class="stat-card"><div class="st-label">生成時間</div><div class="st-value sub">約1〜2分</div><div class="st-note">生成中は同じチャット継続不可</div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">失敗作やイメージ違いも1日の制限にカウントされる</div>
+    <p>Proの「1日3本」という上限には<strong>失敗作やイメージと違った生成結果もカウント</strong>されます。実質的に使える本数はさらに少なくなるため、プロンプトを練ってから生成することを推奨します。</p>
+  </div>
+
+  <h3>主な制約事項</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>制約項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">長さの延長</td><td>8秒から延長はできません（Google Flowなら延長機能あり）</td></tr>
+        <tr><td class="label-cell">解像度変更</td><td>Geminiアプリでは720p固定。4K生成はAPI版のみ</td></tr>
+        <tr><td class="label-cell">アスペクト比変更</td><td>Geminiアプリでは16:9固定。9:16縦型はFlowまたはAPI版で</td></tr>
+        <tr><td class="label-cell">1日の生成上限</td><td>Proは1日3本まで（失敗作含む）</td></tr>
+        <tr><td class="label-cell">年齢制限</td><td>18歳未満は利用不可</td></tr>
+        <tr><td class="label-cell">SynthID</td><td>生成動画すべてに電子透かしを埋め込み</td></tr>
+        <tr><td class="label-cell">著作権</td><td>アップロード画像の権利を持っていることが前提</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">もっと長く・高解像度で作るには ▸ Google Flow</div>
+    <p>より長い動画・4K解像度・縦型動画・本格的な映像制作には<strong>Google Flow</strong>（別サービス）がおすすめ。Extend機能で延長、Scenebuilderで複数クリップを組み合わせ、最大4K出力も可能です。<strong>Proプランなら月1,000クレジット付属</strong>（Veo 3.1 Fastで約50本生成分に相当）。</p>
+  </div>
+</section>
+
+<!-- Section 12: Music Generation -->
+<section id="s12">
+  <div class="section-head">
+    <div class="section-num">12</div>
+    <span class="section-tag">MUSIC GENERATION</span>
+  </div>
+  <h2>音楽生成の詳細スペックと制約</h2>
+  <p class="lede">2026年2月に登場した「Lyria 3」モデルで音楽生成が可能。モードによって長さが変わります。</p>
+
+  <h3>モデル・モードによる長さの違い</h3>
+  <div class="compare">
+    <div class="compare-card" style="border-top: 3px solid var(--blue);">
+      <span class="cc-badge plus">Lyria 3</span>
+      <div class="cc-name">高速モードで生成</div>
+      <div style="text-align: center; margin: 24px 0;"><div style="font-family: 'DM Serif Display'; font-size: 44px; color: var(--blue); line-height: 1;">30<span style="font-size: 16px; color: var(--ink-light); margin-left: 2px;">秒</span></div></div>
+      <p style="font-size: 13px; color: var(--ink-sub); text-align: center; margin: 0;">基本の楽曲生成</p>
+    </div>
+    <div class="compare-card pro">
+      <span class="cc-badge pro">Lyria 3 Pro</span>
+      <div class="cc-name">思考モード / Proモード</div>
+      <div style="text-align: center; margin: 24px 0;"><div style="font-family: 'DM Serif Display'; font-size: 44px; color: var(--gold); line-height: 1;">最長 3<span style="font-size: 16px; color: var(--ink-light); margin-left: 2px;">分</span></div></div>
+      <p style="font-size: 13px; color: var(--ink-sub); text-align: center; margin: 0;">フルトラック生成</p>
+    </div>
+  </div>
+
+  <h3>プラン別の1日あたり生成可能数</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>項目</th><th>無料版</th><th>Google AI Pro</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">1日の生成上限（30秒）</td><td>10トラック</td><td>50トラック</td></tr>
+        <tr><td class="label-cell">Lyria 3 Pro（最長3分）</td><td><span class="tag tag-no">利用不可</span></td><td><span class="tag tag-yes">利用可能</span></td></tr>
+        <tr><td class="label-cell">ボーカル・歌詞生成</td><td><span class="tag tag-yes">対応</span></td><td><span class="tag tag-yes">対応</span></td></tr>
+        <tr><td class="label-cell">日本語歌詞</td><td><span class="tag tag-yes">対応</span></td><td><span class="tag tag-yes">対応</span></td></tr>
+        <tr><td class="label-cell">マルチモーダル入力</td><td><span class="tag tag-yes">写真・動画から生成可</span></td><td><span class="tag tag-yes">写真・動画から生成可</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>その他の仕様・制約</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">出力形式</div><div class="st-value sub">MP3 / MP4<br>（カバー付）</div><div class="st-note">SNS共有リンクも発行可</div></div>
+    <div class="stat-card"><div class="st-label">音質</div><div class="st-value sub">48kHz<br>ステレオ</div><div class="st-note">高品質出力</div></div>
+    <div class="stat-card"><div class="st-label">カバーアート</div><div class="st-value sub">Nano Banana<br>で生成</div><div class="st-note">MP4動画に付与</div></div>
+    <div class="stat-card"><div class="st-label">透かし</div><div class="st-value sub">SynthID<br>埋込み</div><div class="st-note">AI生成物の識別用</div></div>
+    <div class="stat-card"><div class="st-label">年齢制限</div><div class="st-value sub">18歳以上</div><div class="st-note">ベータ版</div></div>
+    <div class="stat-card"><div class="st-label">対応言語</div><div class="st-value sub">日本語含む<br>8言語</div><div class="st-note">英・独・西・仏・ヒンディー・韓・ポル・日</div></div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">著作権関連の制約</div>
+    <p>プロンプトに<strong>特定アーティスト名を入れても模倣は行わず</strong>、「インスピレーション」として類似スタイルの楽曲を生成します。既存曲との照合フィルタも導入されています。商用利用は原則可能ですが、音楽業界特有のリスクがあるためビジネス活用時は慎重に。</p>
+  </div>
+</section>
+
+<!-- Section 13: Excel -->
+<section id="s13">
+  <div class="section-head">
+    <div class="section-num">13</div>
+    <span class="section-tag">EXCEL OUTPUT</span>
+  </div>
+  <h2>チャット上でExcelファイルの出力は可能か？</h2>
+  <p class="lede">結論：<strong>直接の.xlsxファイル生成は不可</strong>。ただしGoogleスプレッドシート経由で出力できます。</p>
+
+  <h3>出力のフロー</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Geminiで表を生成させる</div><div class="step-desc">「〜を表形式で作成して」と依頼</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">「スプレッドシートにエクスポート」をクリック</div><div class="step-desc">表の近くに表示されるボタンから実行</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Googleスプレッドシートが生成される</div><div class="step-desc">セルごとに正しく分割された状態で保存</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Excel形式でダウンロード</div><div class="step-desc">ファイル ▸ ダウンロード ▸ Microsoft Excel (.xlsx)</div></div></div>
+  </div>
+
+  <h3>関数や条件付き書式は対応できるか？</h3>
+  <div class="compare">
+    <div class="compare-card" style="border-top: 3px solid var(--green); background: #f7fbf7;">
+      <div class="cc-name" style="font-size: 16px; color: var(--green);">対応できること</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text"><strong>関数の生成・挿入</strong>（SUM、VLOOKUP、IF等）</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">スプレッドシート経由で関数付きで出力</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">条件付き書式の<strong>設定方法を質問</strong>できる</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Officeスクリプト / VBAコードの生成</div></div>
+    </div>
+    <div class="compare-card" style="border-top: 3px solid var(--red); background: #fffafb;">
+      <div class="cc-name" style="font-size: 16px; color: var(--red);">対応が難しいこと</div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">条件付き書式を<strong>ファイルに直接反映</strong>させる</div></div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">マクロや複雑な書式を埋め込んだ.xlsx生成</div></div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">セル結合や罫線の細かいカスタマイズ</div></div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">現実的な解決策</div>
+    <p><strong>関数付きの表：</strong>Gemini → スプレッドシート → xlsx でOK<br><strong>条件付き書式やマクロ：</strong>Geminiに<strong>Officeスクリプトのコードを生成させて</strong>、Excel側で貼り付け実行する方法が効率的です。VBAも可能ですが、Officeスクリプトの方がWeb版Excelでも動作します。</p>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>関数付きの表は出力可能</strong>（スプレッドシート経由）ですが、条件付き書式や複雑なExcel機能は<strong>コード生成してExcel側で実行する</strong>のが現実的です。</p>
+  </div>
+</section>
+
+<!-- Section 14: File Reading -->
+<section id="s14">
+  <div class="section-head">
+    <div class="section-num">14</div>
+    <span class="section-tag">FILE READING</span>
+  </div>
+  <h2>ファイル読み取り精度は何％か？</h2>
+  <p class="lede">公式に「〇〇％」という精度指標は公開されていませんが、ファイル形式や準備状況によって大きく変わります。</p>
+
+  <div class="callout warn">
+    <div class="c-title">公式な精度指標はない</div>
+    <p>Googleは公式にファイル読み取り精度を％で公表していません。精度は<strong>ファイル形式・文字コード・ファイル構造</strong>などの条件に強く依存します。</p>
+  </div>
+
+  <h3>ファイル形式別の読み取り傾向</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>ファイル形式</th><th>読み取り精度</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">PDF（テキストベース）</td><td><span class="tag tag-yes">高い</span></td><td>文字が選択可能なPDFは安定して読み取れる</td></tr>
+        <tr><td class="label-cell">PDF（スキャン画像）</td><td><span class="tag tag-partial">中程度</span></td><td>OCR処理が必要。精度は画質依存</td></tr>
+        <tr><td class="label-cell">.xlsx（UTF-8）</td><td><span class="tag tag-yes">高い</span></td><td>スプレッドシート経由の方がさらに安定</td></tr>
+        <tr><td class="label-cell">CSV（UTF-8）</td><td><span class="tag tag-yes">高い</span></td><td>列名を英数字にするとさらに精度向上</td></tr>
+        <tr><td class="label-cell">CSV（Shift-JIS）</td><td><span class="tag tag-no">低い</span></td><td>文字化けが発生。UTF-8変換推奨</td></tr>
+        <tr><td class="label-cell">.docx / .txt</td><td><span class="tag tag-yes">高い</span></td><td>安定して処理可能</td></tr>
+        <tr><td class="label-cell">画像（JPG/PNG）</td><td><span class="tag tag-yes">高い</span></td><td>文字認識・物体認識ともに優秀</td></tr>
+        <tr><td class="label-cell">動画・音声</td><td><span class="tag tag-partial">中〜高</span></td><td>長時間だと精度が落ちる傾向</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>精度を上げるためのコツ</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">文字コード</div><div class="st-value sub">UTF-8に統一</div><div class="st-note">Shift-JISは文字化けの原因</div></div>
+    <div class="stat-card"><div class="st-label">ファイル名</div><div class="st-value sub">日本語・特殊<br>文字を避ける</div><div class="st-note">英数字が安定</div></div>
+    <div class="stat-card"><div class="st-label">列名・シート名</div><div class="st-value sub">簡潔に<br>英数字ベース</div><div class="st-note">AIが認識しやすい</div></div>
+    <div class="stat-card"><div class="st-label">ファイルサイズ</div><div class="st-value sub">小さめに<br>分割</div><div class="st-note">大容量は精度低下の原因</div></div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">「架空のデータ」を生成することも</div>
+    <p>ページ数の多いPDFや情報量の多いファイルでは、Geminiが<strong>実在しないデータを作り出すこと</strong>があります。アップロード後は必ず「〇〇は元データに含まれていますか？」と確認するのが安全です。</p>
+  </div>
+</section>
+
+<!-- Section 15: Data Training -->
+<section id="s15">
+  <div class="section-head">
+    <div class="section-num">15</div>
+    <span class="section-tag">DATA TRAINING</span>
+  </div>
+  <h2>データは学習に使用されるか？</h2>
+  <p class="lede">デフォルト設定では<strong>両プランとも学習に使用されます</strong>。手動でオフにすることは可能ですが、履歴機能との引き換えになります。</p>
+
+  <div class="compare">
+    <div class="compare-card free">
+      <span class="cc-badge free">Free</span>
+      <div class="cc-name">無料版</div>
+      <div class="cc-row"><span class="cc-icon warn">▲</span><div class="cc-text">デフォルトで<strong>学習に使用される</strong></div></div>
+      <div class="cc-row"><span class="cc-icon warn">▲</span><div class="cc-text">人間レビューの対象となる可能性あり</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">アクティビティをオフにすれば学習停止</div></div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">オフにすると履歴が残らない（72時間のみ）</div></div>
+    </div>
+    <div class="compare-card pro">
+      <span class="cc-badge pro">Pro</span>
+      <div class="cc-name">Google AI Pro</div>
+      <div class="cc-row"><span class="cc-icon warn">▲</span><div class="cc-text">デフォルトで<strong>学習に使用される</strong></div></div>
+      <div class="cc-row"><span class="cc-icon warn">▲</span><div class="cc-text">無料版と同じプライバシー扱い</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">アクティビティをオフにすれば学習停止</div></div>
+      <div class="cc-row"><span class="cc-icon ng">✕</span><div class="cc-text">料金を払っても学習対象であることに注意</div></div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">重要：無料版・Pro版ともにデータ保護は同レベル</div>
+    <p>Google AI Proは有料プランですが、<strong>データ保護の扱いは無料版と同じ</strong>です。業務データを本気で守るなら<strong>Google Workspace（企業向け）</strong>が必要です。Workspaceプランでは契約上、入力データが学習に使われないことが保証されます。</p>
+  </div>
+
+  <h3>学習させないための設定手順</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Geminiにアクセスしてログイン</div><div class="step-desc">gemini.google.com</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">左メニューから「アクティビティ」を選択</div><div class="step-desc">マイアクティビティ画面が開く</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">「Geminiアプリアクティビティ」をオフにする</div><div class="step-desc">「オフにしてアクティビティを削除」を選ぶと過去履歴も消去</div></div></div>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">設定変更前のデータは既に学習済みの可能性</div>
+    <p>オフに変更しても、<strong>変更前に入力したデータはすでに学習に使われている可能性</strong>があります。機密情報を扱う場合は最初からWorkspaceプランを使うのが確実です。</p>
+  </div>
+
+  <div class="summary-box">
+    <p>無料版・Pro版とも<strong>デフォルトでは学習に使われます</strong>。機密情報を扱うならアクティビティをオフにするか、Workspaceプランに切り替えてください。</p>
+  </div>
+</section>
+
+<!-- Section 16: Copyright -->
+<section id="s16">
+  <div class="section-head">
+    <div class="section-num">16</div>
+    <span class="section-tag">COPYRIGHT</span>
+  </div>
+  <h2>肖像権・著作権の線引きと対策</h2>
+  <p class="lede">「Googleは著作権を主張しない」「生成物はユーザーに帰属」が基本ですが、プランによって保証の度合いが変わります。</p>
+
+  <h3>プラン別の著作権まわりの違い</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>項目</th><th>無料版</th><th>Google AI Pro</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">生成物の著作権</td><td>ユーザーに帰属</td><td>ユーザーに帰属</td></tr>
+        <tr><td class="label-cell">商用利用の明示的許可</td><td><span class="tag tag-no">記載なし</span></td><td><span class="tag tag-no">記載なし</span></td></tr>
+        <tr><td class="label-cell">商用利用の禁止</td><td><span class="tag tag-no">記載なし</span><span class="muted">（グレーゾーン）</span></td><td><span class="tag tag-no">記載なし</span><span class="muted">（グレーゾーン）</span></td></tr>
+        <tr><td class="label-cell">著作権補償プログラム</td><td><span class="tag tag-no">対象外</span></td><td><span class="tag tag-no">対象外</span></td></tr>
+        <tr><td class="label-cell">SynthID透かし</td><td><span class="tag tag-yes">埋め込み</span></td><td><span class="tag tag-yes">埋め込み</span></td></tr>
+        <tr><td class="label-cell">推奨される用途</td><td>個人・非商用</td><td>個人・商用自己責任</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">補償プログラムの対象はWorkspaceとVertex AIのみ</div>
+    <p>Googleの「著作権補償プログラム」は<strong>Google Workspace / Vertex AI</strong>の法人契約のみが対象です。無料版・Pro版で生成した画像が著作権侵害と判断されても、<strong>ユーザー自身が法的責任を負います</strong>。</p>
+  </div>
+
+  <h3>Geminiの画像生成で禁止されていること</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">人物の類似</div><div class="st-value sub">実在の有名人・<br>公人そっくり</div><div class="st-note">2026年2月から強化</div></div>
+    <div class="stat-card"><div class="st-label">キャラクター</div><div class="st-value sub">版権キャラ<br>そっくり</div><div class="st-note">ディズニー・マーベル等</div></div>
+    <div class="stat-card"><div class="st-label">商標・ロゴ</div><div class="st-value sub">企業ロゴや<br>ブランドマーク</div><div class="st-note">商標権侵害リスク</div></div>
+    <div class="stat-card"><div class="st-label">顔交換</div><div class="st-value sub">Face swap</div><div class="st-note">ディープフェイク防止</div></div>
+    <div class="stat-card"><div class="st-label">金融文書改ざん</div><div class="st-value sub">小切手・<br>領収書等</div><div class="st-note">詐欺防止</div></div>
+    <div class="stat-card"><div class="st-label">実在人物の<br>衣装交換</div><div class="st-value sub">リアル画像<br>の編集</div><div class="st-note">プライバシー保護</div></div>
+  </div>
+
+  <h3>ビジネス利用時の具体的な対策</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">類似画像検索ツールでチェック</div><div class="step-desc">既存作品との重複がないか、Google画像検索やTinEyeで確認</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">人物顔は特定されないよう加工</div><div class="step-desc">シルエット化、顔ぼかし、汎用的なデザインに変更</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">プロンプトに「オリジナル」を含める</div><div class="step-desc">「既存のキャラクターに似せないで」と明示的に指示</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">重要な用途は法務レビュー</div><div class="step-desc">広告・ウェブサイト等の対外的コンテンツは法務部確認を</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">ビジネスならWorkspace導入を検討</div><div class="step-desc">著作権補償を受けるには法人契約が必須</div></div></div>
+  </div>
+
+  <div class="summary-box">
+    <p>無料版もPro版も「<strong>グレーゾーン</strong>」の扱いです。個人・小規模なら自己責任で使えますが、ビジネスで本格利用するなら<strong>Workspace（法人プラン）</strong>への移行と法務レビューを徹底してください。</p>
+  </div>
+</section>
+
+<!-- Section 17: Gems -->
+<section id="s17">
+  <div class="section-head">
+    <div class="section-num">17</div>
+    <span class="section-tag">GEMS</span>
+  </div>
+  <h2>Gems（カスタムAI）について</h2>
+  <p class="lede">Gemsは特定のタスク・業務に特化したAIアシスタントを作れるカスタマイズ機能。ChatGPTのGPTsに相当します。</p>
+
+  <div class="glossary">
+    <strong>Gems</strong>
+    <div class="def">Gemini上で作成できる「自分専用AIアシスタント」。名前・カスタム指示・知識ファイル を登録することで、特定のタスクを繰り返し実行する専用AIを構築できます。</div>
+    <div class="ex">例：「ビジネスメール返信アシスタント」「議事録作成アシスタント」「英和翻訳アシスタント」</div>
+  </div>
+
+  <h3>Gems作成上限はあるか？</h3>
+  <div class="callout">
+    <div class="c-title">公式な作成数の上限は公開されていない</div>
+    <p>2026年6月時点、Googleは<strong>Gemsの作成可能数について公式な数値を公表していません</strong>。無料版でもGems自体は作成・利用可能で、一般的な利用範囲で上限に達したという報告はほぼありません。</p>
+  </div>
+
+  <h3>プラン別のGems利用条件</h3>
+  <div class="compare">
+    <div class="compare-card free">
+      <span class="cc-badge free">Free</span>
+      <div class="cc-name">無料版</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Gems作成・利用<strong>可能</strong></div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">プリメイドGemsも利用可能</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">カスタム指示・知識ファイル対応</div></div>
+      <div class="cc-row"><span class="cc-icon warn">▲</span><div class="cc-text">高性能モデルの利用回数に制限</div></div>
+    </div>
+    <div class="compare-card pro">
+      <span class="cc-badge pro">Pro</span>
+      <div class="cc-name">Google AI Pro</div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Gems作成・利用<strong>可能</strong></div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">高性能モデル（Pro 3.1）もフル活用</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">Google ドライブ連携も高機能</div></div>
+      <div class="cc-row"><span class="cc-icon ok">●</span><div class="cc-text">大量データ処理も安定</div></div>
+    </div>
+  </div>
+
+  <h3>Gemsにアップロードできるファイル数と容量</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">1つのGemあたり</div><div class="st-value gold">10<span class="unit">ファイル</span></div><div class="st-note">通常のチャットと同じ</div></div>
+    <div class="stat-card"><div class="st-label">1ファイル最大</div><div class="st-value gold">100<span class="unit">MB</span></div><div class="st-note">同じく通常制限と同様</div></div>
+    <div class="stat-card"><div class="st-label">Googleドライブ連携</div><div class="st-value sub">◎ 対応</div><div class="st-note">ファイル更新も反映</div></div>
+    <div class="stat-card"><div class="st-label">Gem作成・編集</div><div class="st-value sub">Web版のみ</div><div class="st-note">モバイルは閲覧・利用のみ</div></div>
+  </div>
+
+  <h3>カスタム指示の文字数制限</h3>
+  <div class="callout warn">
+    <div class="c-title">明確な上限は公表されていないが、実際に制限はある</div>
+    <p>Googleは<strong>具体的な文字数を公表していません</strong>が、ユーザー報告では<strong>長すぎるプロンプトは途中で切れる</strong>ケースが確認されています。目安として、Gemini APIのシステム指示は数千〜数万トークンまで対応可能ですが、Gemsの実用的な目安はもっと少なめです。</p>
+    <p style="margin-top: 8px;"><strong>回避策：</strong>カスタム指示を短く保ち、長いプロンプトは<strong>.mdファイルとして保存して「知識」にアップロードする</strong>方法が推奨されています。</p>
+  </div>
+
+  <div class="new-feature">
+    <h4>カスタム指示 vs Gems の使い分け</h4>
+    <p><strong>カスタム指示：</strong>1アカウントに1セットのみ。全チャットに反映される「基本設定」。</p>
+    <p><strong>Gems：</strong>複数作成可能。特定タスク専用の「専用アシスタント」として使い分けられる。</p>
+    <p>カスタム指示で「全体的な文体・前提」を定義し、Gemsで「タスク別の専門家」を作る、という組み合わせが最強です。</p>
+  </div>
+
+  <h3>日本語・英語で出力精度は違うか？</h3>
+  <div class="lang-compare">
+    <div class="lang-card">
+      <h4 class="jp">🇯🇵 日本語</h4>
+      <div class="lc-row"><strong>公式サポート：</strong>サポート対象言語</div>
+      <div class="lc-row"><strong>回答の自然さ：</strong>高い（3.1 Proで特に改善）</div>
+      <div class="lc-row"><strong>トークン効率：</strong>低い（1文字=多トークン）</div>
+      <div class="lc-row"><strong>コンテキスト：</strong>実質容量は少なめ</div>
+      <div class="lc-row"><strong>おすすめ用途：</strong>社内業務・日常タスク</div>
+    </div>
+    <div class="lang-card">
+      <h4 class="en">🇺🇸 英語</h4>
+      <div class="lc-row"><strong>公式サポート：</strong>メイン言語</div>
+      <div class="lc-row"><strong>回答の自然さ：</strong>最高水準</div>
+      <div class="lc-row"><strong>トークン効率：</strong>高い（1単語≒0.75トークン）</div>
+      <div class="lc-row"><strong>コンテキスト：</strong>最大量を活用可</div>
+      <div class="lc-row"><strong>おすすめ用途：</strong>技術文書・最新情報調査</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">Personal Intelligence機能は一部英語限定</div>
+    <p>カスタム指示機能自体は日本語でも問題なく動作しますが、<strong>Personal Intelligence（Gmail等の連携）の一部機能は英語環境のみ</strong>で利用可能です。日本語で使いたい場合は、Gemini全体の言語設定を英語に変更する必要があります。</p>
+  </div>
+
+  <div class="callout tip">
+    <div class="c-title">実務のヒント</div>
+    <p>Gemsのカスタム指示は<strong>日本語でもしっかり動作します</strong>。精度差は日常業務ではほとんど感じられません。ただし、<strong>大量のデータ処理や最新技術情報を扱う場合は英語での指示の方がトークン効率が良く</strong>、同じコンテキスト窓でも多くの情報を扱えます。技術文書の分析なら英語指示、社内業務なら日本語指示、と使い分けるのがおすすめです。</p>
+  </div>
+
+  <h3>効果的なGems設計の4要素</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">① 役割</div><div class="st-value sub">ペルソナ設定</div><div class="st-note">「あなたはプロの〇〇です」</div></div>
+    <div class="stat-card"><div class="st-label">② タスク</div><div class="st-value sub">目的の明確化</div><div class="st-note">「〇〇を〇〇のために行う」</div></div>
+    <div class="stat-card"><div class="st-label">③ コンテキスト</div><div class="st-value sub">背景情報</div><div class="st-note">「対象読者は〇〇」</div></div>
+    <div class="stat-card"><div class="st-label">④ フォーマット</div><div class="st-value sub">出力形式</div><div class="st-note">「箇条書きで3項目以内」</div></div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- PART 4 -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART 4</div>
+    <div class="part-title">Pro特有の追加価値</div>
+    <p class="part-desc">Google AI Proに加入すると利用できる、AI機能以外の特典・連携機能を整理しました。</p>
+  </div>
+</div>
+
+<section id="s18">
+  <div class="section-head">
+    <div class="section-num">18</div>
+    <span class="section-tag">PRO VALUE-ADDS</span>
+  </div>
+  <h2>Google Apps統合・Flow・NotebookLM・学生特典<span class="tag tag-new" style="margin-left: 8px; font-size: 10px;">NEW SECTION</span></h2>
+  <p class="lede">Google AI Proは単なるAIチャットではありません。Googleエコシステム全体と統合された<strong>業務生産性プラットフォーム</strong>として設計されています。</p>
+
+  <h3>Google Apps統合 — 毎日使うツールにGeminiが常駐</h3>
+  <p>Proプランに加入すると、Gmail・Docs・Sheets・Slides・Meetの中で直接Geminiを呼び出せます。いちいちチャット画面に切り替える必要がありません。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>アプリ</th><th>Gemini連携機能</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">Gmail</td><td>返信文の下書き、長文メールの要約、翻訳、スレッド要約</td></tr>
+        <tr><td class="label-cell">Googleドキュメント</td><td>文章の校正・リライト、構成提案、表の作成</td></tr>
+        <tr><td class="label-cell">Googleスプレッドシート</td><td>関数生成、データ分析、グラフ作成、条件付き書式の提案</td></tr>
+        <tr><td class="label-cell">Googleスライド</td><td>アウトライン生成、画像生成、デザイン提案</td></tr>
+        <tr><td class="label-cell">Google Meet</td><td>リアルタイム議事録、録画の要約、翻訳字幕</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>NotebookLM連携 — 上位利用枠が付属</h3>
+  <div class="new-feature">
+    <h4>NotebookLMとは</h4>
+    <p>Googleが開発した「自分の資料専用のAI」。アップロードしたPDFやドキュメントだけを参照してAIが回答するため、<strong>社内資料の検索・要約・質問応答</strong>に最適です。Proプランでは上位利用枠が解放され、より多くの資料・ノートブックを扱えます。</p>
+  </div>
+
+  <h3>Google Flow — 本格的なAI動画スタジオ</h3>
+  <p>Geminiアプリの動画生成には厳しい制限がありますが、<strong>Proプランには月1,000 AIクレジットのFlow利用枠</strong>が付属します。</p>
+
+  <div class="media-compare">
+    <div class="media-card">
+      <div class="mc-head"><span class="icon-lg">💫</span>Geminiアプリの動画生成</div>
+      <div class="duration-row"><span class="d-label">長さ</span><span class="d-value">8秒固定</span></div>
+      <div class="duration-row"><span class="d-label">解像度</span><span class="d-value">720p固定</span></div>
+      <div class="duration-row"><span class="d-label">アスペクト比</span><span class="d-value">16:9固定</span></div>
+      <div class="duration-row"><span class="d-label">1日の上限</span><span class="d-value">3本</span></div>
+    </div>
+    <div class="media-card" style="background: var(--gold-pale); border-color: var(--gold);">
+      <div class="mc-head"><span class="icon-lg">🎬</span>Google Flow（Pro特典）</div>
+      <div class="duration-row"><span class="d-label">長さ</span><span class="d-value emphasis">延長可能</span></div>
+      <div class="duration-row"><span class="d-label">解像度</span><span class="d-value emphasis">最大4K</span></div>
+      <div class="duration-row"><span class="d-label">アスペクト比</span><span class="d-value emphasis">縦型・横型</span></div>
+      <div class="duration-row"><span class="d-label">月のクレジット</span><span class="d-value emphasis">1,000</span></div>
+    </div>
+  </div>
+  <p class="tiny">※ Flowでは Veo 3.1 Fast 1本あたり約20クレジット。月1,000クレジットで<strong>約50本生成可能</strong>。</p>
+
+  <h3>学生向け：Proへの無料アップグレード</h3>
+  <div class="callout tip">
+    <div class="c-title">対象国の学生はProプランへ無料アップグレード可能</div>
+    <p>日本を含む対象国（インドネシア・英国・ブラジルなど）の<strong>18歳以上の学生</strong>は、<strong>2026年7月までの申込み</strong>でGoogle AI Proプランへ無料アップグレードできます。<strong>NotebookLMと2TBのストレージ</strong>も付帯し、試験対策・文章作成・宿題のサポートなどに活用できます。研修対象者に学生が含まれる場合は必ず案内しましょう（提供条件・期限は変更される場合があります）。</p>
+  </div>
+
+  <h3>ファミリー共有で実質コストを下げる</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">契約者＋家族</div><div class="st-value gold">最大 6<span class="unit">人</span></div><div class="st-note">本人含む</div></div>
+    <div class="stat-card"><div class="st-label">1人あたり実質</div><div class="st-value gold">約 483<span class="unit">円/月</span></div><div class="st-note">¥2,900 ÷ 6人</div></div>
+    <div class="stat-card"><div class="st-label">ストレージ共有</div><div class="st-value sub">5TB</div><div class="st-note">家族でシェア</div></div>
+    <div class="stat-card"><div class="st-label">関係性制約</div><div class="st-value sub">なし</div><div class="st-note">血縁・同居不問</div></div>
+  </div>
+
+  <div class="summary-box">
+    <p>Google AI Proは<strong>AI機能だけで評価すると割高</strong>に見えますが、<strong>5TBストレージ、Flow、NotebookLM上位枠、ファミリー共有</strong>まで含めれば非常にお得です。特にGoogle Workspaceと併用している組織・家庭では、実質的な負担感が大きく下がります。</p>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- PART 5 -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART 5</div>
+    <div class="part-title">補足情報</div>
+    <p class="part-desc">Ultraプランの詳細情報と、全体を俯瞰するサマリー・プラン選定ガイドです。</p>
+  </div>
+</div>
+
+<!-- Section 19: Ultra -->
+<section id="s19" class="ultra-section">
+  <div class="section-head">
+    <div class="section-num">19</div>
+    <span class="section-tag">ULTRA PLAN</span>
+  </div>
+  <h2>Google AI Ultra プラン情報</h2>
+  <p class="lede"><span class="tag tag-update">UPDATED</span>プロフェッショナル向けの最上位プラン。2026年5月の再編で<strong>月額¥14,500（Proの5倍枠）</strong>と<strong>月額¥32,000（Proの20倍枠）</strong>の2段階構成になりました。ヘビーユーザーや最先端機能を業務で使い倒したい方向けです。</p>
+
+  <h3>Ultraプランの主な特徴</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">月額料金</div><div class="st-value purple">¥14,500〜</div><div class="st-note">¥14,500＝5倍枠／¥32,000＝20倍枠</div></div>
+    <div class="stat-card"><div class="st-label">ストレージ</div><div class="st-value purple">20<span class="unit">TB〜</span></div><div class="st-note">Proの4倍</div></div>
+    <div class="stat-card"><div class="st-label">使用量</div><div class="st-value purple">Proの<br>5〜20<span class="unit">倍</span></div><div class="st-note">プランにより選択</div></div>
+    <div class="stat-card"><div class="st-label">Flowクレジット</div><div class="st-value purple">10,000<br>〜25,000<span class="unit">/月</span></div><div class="st-note">大量の動画制作向け</div></div>
+    <div class="stat-card"><div class="st-label">Deep Think</div><div class="st-value purple">対応</div><div class="st-note">最高精度の推論</div></div>
+    <div class="stat-card"><div class="st-label">Project Genie</div><div class="st-value purple">対応</div><div class="st-note">Genie 3 世界モデル</div></div>
+  </div>
+
+  <div class="callout note" style="border-left-color: var(--purple); background: var(--purple-soft);">
+    <div class="c-title" style="color: var(--purple);">最先端の限定機能（一部は米国・英語のみ）</div>
+    <p>Ultraでは <strong>Deep Think</strong>（並列で深く考える推論）、<strong>Gemini Spark</strong>、世界モデル <strong>Project Genie（Genie 3）</strong> をいち早く利用できます。あわせて Google Home Premium・YouTube Premium などの特典も付きます。なお Deep Think・Gemini Spark など一部の高度機能は<strong>米国・英語環境のみ</strong>での提供です。</p>
+  </div>
+
+  <h3>Ultraだけで使える独自機能</h3>
+  <p class="muted" style="font-size:13px;">※「◯/日」は移行前の公表値にもとづく<strong>参考の目安</strong>です（現在は倍率＋週次の仕組み）。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>機能</th><th>内容</th><th>Pro</th><th>Ultra</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-cell">Deep Think</td>
+          <td class="muted" style="display: table-cell; margin: 0;">並列で深く考える高度な推論モード</td>
+          <td><span class="dash">—</span></td>
+          <td><strong>対応</strong><br><span class="muted">Ultra限定</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">Project Genie</td>
+          <td class="muted" style="display: table-cell; margin: 0;">Genie 3 でインタラクティブな世界を生成</td>
+          <td><span class="dash">—</span></td>
+          <td><strong>対応</strong><br><span class="muted">米国・英語のみ</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">動画生成（Veo）</td>
+          <td class="muted" style="display: table-cell; margin: 0;">Ultraは通常版（Fastでない）</td>
+          <td>Veo 3.1 Fast<br>3本/日（目安）</td>
+          <td><strong>Veo 3.1（通常）<br>5本/日（目安）</strong></td>
+        </tr>
+        <tr>
+          <td class="label-cell">Deep Research</td>
+          <td class="muted" style="display: table-cell; margin: 0;">出典付き調査レポート</td>
+          <td>20 / 日（目安）</td>
+          <td><strong>120 / 日（目安）</strong></td>
+        </tr>
+        <tr>
+          <td class="label-cell">音楽生成</td>
+          <td class="muted" style="display: table-cell; margin: 0;">Lyria 3 / Lyria 3 Pro</td>
+          <td>50 / 日（目安）</td>
+          <td><strong>100 / 日（目安）</strong></td>
+        </tr>
+        <tr>
+          <td class="label-cell">画面の操作代行</td>
+          <td class="muted" style="display: table-cell; margin: 0;">AIが画面を見て操作を代行</td>
+          <td>20 / 日（目安）</td>
+          <td><strong>120 / 日（目安）</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ultraが適しているユーザー像</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">コンテンツクリエイター</div><div class="st-value sub">動画・音楽を<br>大量に生成</div><div class="st-note">Flow 最大25,000クレジット</div></div>
+    <div class="stat-card"><div class="st-label">リサーチ業務</div><div class="st-value sub">Deep Research<br>を大量に</div><div class="st-note">大量調査が必要</div></div>
+    <div class="stat-card"><div class="st-label">開発・研究</div><div class="st-value sub">Deep Think<br>複雑な推論</div><div class="st-note">最高精度が必要</div></div>
+    <div class="stat-card"><div class="st-label">効率化推進</div><div class="st-value sub">操作代行で<br>業務を効率化</div><div class="st-note">複雑タスクを代行</div></div>
+  </div>
+
+  <div class="callout note" style="border-left-color: var(--purple); background: var(--purple-soft);">
+    <div class="c-title" style="color: var(--purple);">Ultraプランの注意点</div>
+    <p>Ultraは強力ですが、<strong>データ保護の扱いはPro・無料版と同じ</strong>です。機密情報を扱うなら、Ultraではなく<strong>Workspaceプラン（法人契約）</strong>を検討してください。補償プログラムもWorkspace/Vertex AIのみが対象です。</p>
+  </div>
+
+  <div class="summary-box" style="background: linear-gradient(135deg, #f1ebfa 0%, #faf7fd 100%); border-color: #d4c0e8;">
+    <p style="color: var(--purple-deep);">Ultraは<strong>業務で動画・音楽・Deep Think・Project Genieを使い倒す</strong>ユーザー向けの最上位プラン。通常業務ならPro、最先端機能が必要な専門職ならUltra、というのが選び方の目安です。</p>
+  </div>
+</section>
+
+<!-- Section 20: Final Summary -->
+<section id="s20">
+  <div class="section-head">
+    <div class="section-num">20</div>
+    <span class="section-tag">SUMMARY</span>
+  </div>
+  <h2>全体サマリー・プラン選定ガイド</h2>
+
+  <h3>機能別の対応状況一覧</h3>
+  <p class="muted" style="font-size:13px;">※「◯/日」「◯/月」は<strong>移行前の公表値・第三者検証にもとづく参考の目安</strong>です。現在は使用量が倍率＋週次（コンピュート使用量モデル）で管理されます。料金は2026年6月14日時点の公式表示。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>機能</th><th class="num">無料</th><th class="num">Pro</th><th class="num">Ultra</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">月額料金</td><td class="num">¥0</td><td class="num">¥2,900</td><td class="num">¥14,500〜</td></tr>
+        <tr><td class="label-cell">使用量の倍率</td><td class="num">1倍</td><td class="num">無料の4倍</td><td class="num">Proの5〜20倍</td></tr>
+        <tr><td class="label-cell">ストレージ</td><td class="num">15GB</td><td class="num">5TB</td><td class="num">20TB〜</td></tr>
+        <tr><td class="label-cell">ファミリー共有</td><td class="num"><span class="dash">—</span></td><td class="num">最大6人</td><td class="num">最大6人</td></tr>
+        <tr><td class="label-cell">コンテキスト窓</td><td class="num">32K</td><td class="num">1M</td><td class="num">1M</td></tr>
+        <tr><td class="label-cell">カスタム指示</td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td></tr>
+        <tr><td class="label-cell">メモリー機能</td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td></tr>
+        <tr><td class="label-cell">画像生成（標準）<span class="muted">目安</span></td><td class="num">20/日</td><td class="num">100/日</td><td class="num">1000/日</td></tr>
+        <tr><td class="label-cell">画像生成（Pro）<span class="muted">目安</span></td><td class="num"><span class="dash">—</span></td><td class="num">100/日</td><td class="num">1000/日</td></tr>
+        <tr><td class="label-cell">動画生成（Veo）<span class="muted">目安</span></td><td class="num"><span class="dash">—</span></td><td class="num">3/日</td><td class="num">5/日</td></tr>
+        <tr><td class="label-cell">音楽生成（Lyria 3）<span class="muted">目安</span></td><td class="num">10/日</td><td class="num">50/日</td><td class="num">100/日</td></tr>
+        <tr><td class="label-cell">Deep Research<span class="muted">目安</span></td><td class="num">5/月</td><td class="num">20/日</td><td class="num">120/日</td></tr>
+        <tr><td class="label-cell">音声解説<span class="muted">目安</span></td><td class="num">20/日</td><td class="num">20/日</td><td class="num">20/日</td></tr>
+        <tr><td class="label-cell">Deep Think</td><td class="num"><span class="dash">—</span></td><td class="num"><span class="dash">—</span></td><td class="num"><span class="tag tag-yes">○</span></td></tr>
+        <tr><td class="label-cell">Project Genie</td><td class="num"><span class="dash">—</span></td><td class="num"><span class="dash">—</span></td><td class="num"><span class="tag tag-yes">○</span></td></tr>
+        <tr><td class="label-cell">Flowクレジット</td><td class="num"><span class="dash">—</span></td><td class="num">1,000/月</td><td class="num">最大25,000/月</td></tr>
+        <tr><td class="label-cell">Gems作成</td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td><td class="num"><span class="tag tag-yes">○</span></td></tr>
+        <tr><td class="label-cell">データ学習</td><td class="num"><span class="tag tag-partial">デフォON</span></td><td class="num"><span class="tag tag-partial">デフォON</span></td><td class="num"><span class="tag tag-partial">デフォON</span></td></tr>
+        <tr><td class="label-cell">著作権補償</td><td class="num"><span class="tag tag-no">対象外</span></td><td class="num"><span class="tag tag-no">対象外</span></td><td class="num"><span class="tag tag-no">対象外</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>こんな使い方なら、このプラン</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>ユースケース</th><th>おすすめプラン</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>まずはAIを体験したい／たまに画像を作る程度</td><td><span class="plan-pill free">無料</span> で十分</td></tr>
+        <tr><td>週に数回、資料作成や画像生成で使いたい</td><td><span class="plan-pill plus">Plus</span> が手頃（月725円）</td></tr>
+        <tr><td>毎日業務で使う／長い動画・音声を読ませたい</td><td><span class="plan-pill pro">Pro</span> がベストバランス</td></tr>
+        <tr><td>動画生成・Deep Think・Project Genieを使い倒す</td><td><span class="plan-pill ultra">Ultra</span> 一択</td></tr>
+        <tr><td>企業で機密情報を扱いながら本格活用</td><td><strong>Workspace</strong>（法人契約）</td></tr>
+        <tr><td>学生で学習・研究に使いたい</td><td><span class="plan-pill pro">Pro</span> <strong>無料アップグレード特典</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="c-title">研修・顧客提案でのご活用について</div>
+    <p>本資料は<strong>2026年6月14日時点</strong>のGoogle公式ヘルプセンター・公式料金ページおよび各種報道記事を参照しています。Geminiは頻繁にアップデートが入るため、<strong>重要な業務判断の前には必ず公式ヘルプセンターで最新情報をご確認ください</strong>。特に<strong>料金・使用量の倍率・画像/動画の枚数・データ学習・著作権</strong>まわりの規約は変更が入りやすい項目です。</p>
+  </div>
+</section>
+
+<footer>
+  <strong>主要参照元</strong>
+  <ul class="sources">
+    <li>Google公式「Gemini 定期購入（日本）」料金ページ</li>
+    <li>Google公式ヘルプ「Google AI のサブスクリプション プランに応じた Gemini アプリの使用量上限とアップグレード」</li>
+    <li>Google公式ヘルプ「Gemini アプリのプライバシー ハブ」「アクティビティの管理・削除」</li>
+    <li>Google公式ブログ「Gemini 3 / Gemini 3.1 Pro / Gemini 3 Flash / Gemini 3.5 Flash」発表記事</li>
+    <li>Google公式「Gemini Drops」「Gemini アプリ リリースノート」</li>
+    <li>Google I/O 2026 関連発表（Gemini 3.5世代・Gemini Omni・使用量モデル刷新）</li>
+    <li>Google Workspace 管理者ヘルプ「Gemini アプリのオン／オフ」</li>
+    <li>ITmedia、Impress Watch、jetstream.blog 等の報道</li>
+    <li>AI総合研究所、Zenken AI、テックキャンプ 等の解説（使用量モデル・制限の検証）</li>
+    <li>Artificial Analysis ほかモデル公表値（事実性ベンチマーク）</li>
+  </ul>
+  <div class="footer-meta">
+    <span>Version 3.1 — 2026/06/14 Updated（厳密ファクトチェック反映版）</span>
+    <span>作成：AI Labo</span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1174,7 +1174,7 @@
   <div class="eyebrow">GEMINI CHAT — COMPREHENSIVE REFERENCE GUIDE</div>
   <h1>Gemini Chatの<br>詳細・<span class="accent">制約まとめ</span></h1>
   <p class="hero-sub">機能の基本制約から、カスタム指示・メモリー・著作権・Gemsまで。</p>
-  <p class="hero-desc">無料版とGoogle AI Proを中心に比較し、最下部にUltraプラン情報を補足しています。Google I/O 2026（5/19）以降の最新情報でファクトチェック済み。</p>
+  <p class="hero-desc">個人版（無料・AI Pro等）に加え、<strong>法人版（Google Workspace）</strong>のGeminiも解説します。両者は料金体系・データ保護・使える機能が大きく異なります。Google I/O 2026（5/19）以降の最新情報でファクトチェック済み。</p>
 
   <div class="hero-meta">
     <div><strong>調査日</strong><span>2026年6月14日</span></div>
@@ -1195,6 +1195,7 @@
       <li><strong>学生特典を更新：</strong>日本を含む対象国の18歳以上の学生は、2026年7月までの申込みでProへ無料アップグレード可能</li>
       <li><strong>上限到達時の挙動を明記：</strong>週次上限に達すると <strong>Gemini 3 Flash-Lite</strong> に切り替わって会話を継続できる</li>
       <li><strong>【6/14 ファクトチェック修正】</strong>事実性ベンチマークを公式公表値のみに差し替え。一次情報で確認できなかった「Gemini 3.1 Pro 79.6%」や他社モデルの数値は削除し、<strong>Gemini 3 Pro 72.1%（前世代2.5 Proは54.5%）</strong>のみ掲載に変更</li>
+      <li><strong>【6/14 法人版を追加】</strong>新パート「<strong>法人プラン（Google Workspace）</strong>」を追加。Business Standard料金、個人版との違い（<strong>カスタム指示・記憶機能が法人版には無い</strong>）、AI Expanded Accessアドオン、データ保護を網羅</li>
     </ul>
   </div>
 
@@ -1225,6 +1226,7 @@
     <div class="toc-group-title"><span class="part-num">PART 1</span>プランの全体像</div>
     <div class="toc-list">
       <div class="toc-item"><span class="toc-num">01</span><a href="#s1">4つのプラン・料金・ストレージ・家族共有</a></div>
+      <div class="toc-item"><span class="toc-num">法</span><a href="#sb">法人プラン（Workspace）と個人版の違い</a></div>
     </div>
   </div>
 
@@ -1372,12 +1374,189 @@
 </section>
 
 <!-- ============================================================= -->
+<!-- PART B : BUSINESS / WORKSPACE -->
+<!-- ============================================================= -->
+<div class="part-divider">
+  <div class="part-label-wrap">
+    <div class="part-label">PART B（法人向け）</div>
+    <div class="part-title">法人プラン（Google Workspace）のGemini</div>
+    <p class="part-desc">会社のアカウント（Google Workspace）で使うGeminiは、個人版とは別物です。料金体系・データ保護・使える機能が大きく異なります。<strong>個人版にあって法人版にない機能</strong>もあるため、導入前に必ず確認してください。</p>
+  </div>
+</div>
+
+<section id="sb">
+  <div class="section-head">
+    <div class="section-num">法</div>
+    <span class="section-tag">BUSINESS / GOOGLE WORKSPACE</span>
+  </div>
+  <h2>法人版Geminiの基本：Workspaceに「標準同梱」</h2>
+  <p class="lede">会社で<strong>Google Workspace</strong>（Gmail・ドキュメント等のビジネス版）を契約していれば、Geminiは<strong>追加料金なしで標準同梱</strong>されています。かつての「Gemini for Workspace」アドオン（1人月2,260円規模）は2025年に廃止され、全プランに無料で含まれる形になりました（その際に基本料金が約17〜22%値上げ）。</p>
+
+  <div class="glossary">
+    <strong>Google Workspace（グーグル・ワークスペース）</strong>
+    <div class="def">Gmail・ドキュメント・スプレッドシート・Meetなどを<strong>企業向けにパッケージ化</strong>したGoogleの有料サービス。会社が独自ドメイン（＠会社名.co.jp等）でアカウントを発行します。</div>
+    <div class="ex">「個人で試す → 個人版Gemini」「会社の業務で使う → Workspace版Gemini」という切り分けが基本です。</div>
+  </div>
+
+  <h3>法人向け3プランの料金・スペック</h3>
+  <p class="muted" style="font-size:13px;">※価格は<strong>年間契約・税抜・1ユーザーあたり月額</strong>（2026年6月時点のGoogle公式表示）。フレキシブル契約（いつでも解約可）は約16〜20%高くなります。中小企業（300名以下）はこの3つから選びます。</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pc-tier">STARTER</div>
+      <div class="pc-name">Business Starter</div>
+      <div class="pc-price">¥800</div>
+      <div class="pc-price-sub">ユーザー/月（年間・税抜）</div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>30GB</strong>/人</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Meet <strong>100人</strong>まで</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Geminiアプリ・Gmail内Gemini</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Docs/Sheets内Geminiは<strong>制限あり</strong></span></div>
+    </div>
+    <div class="pricing-card pro">
+      <div class="pc-featured">中小企業の定番</div>
+      <div class="pc-tier">STANDARD</div>
+      <div class="pc-name">Business Standard</div>
+      <div class="pc-price">¥1,600</div>
+      <div class="pc-price-sub">ユーザー/月（年間・税抜）</div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>2TB</strong>/人（プール型）</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Meet <strong>150人</strong>＋録画・ノイズ除去</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span><strong>全Workspaceアプリ</strong>でGemini統合</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>NotebookLM の拡張利用</span></div>
+    </div>
+    <div class="pricing-card">
+      <div class="pc-tier">PLUS</div>
+      <div class="pc-name">Business Plus</div>
+      <div class="pc-price">¥2,500</div>
+      <div class="pc-price-sub">ユーザー/月（年間・税抜）</div>
+      <div class="pc-divider"></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>ストレージ <strong>5TB</strong>/人</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>Meet <strong>500人</strong>＋出欠管理</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span><strong>Vault</strong>（データ保持・検索）</span></div>
+      <div class="pc-feat"><span class="pc-feat-dot">●</span><span>高度なエンドポイント管理</span></div>
+    </div>
+  </div>
+  <div class="callout tip">
+    <div class="c-title">Geminiをフル活用するなら Business Standard 以上</div>
+    <p>GeminiアプリやGmail内Geminiは<strong>全プラン</strong>で使えますが、<strong>Docs・Sheets・Slides内でのGemini</strong>を本格的に使うには <strong>Business Standard 以上</strong>が必要です。中小企業の多くはStandardが標準的な選択になります。</p>
+  </div>
+
+  <h3 id="sb-compare">【最重要】個人版 vs 法人版（Business Standard）の違い</h3>
+  <p>同じ「Gemini」でも、個人アカウントと会社アカウント（Workspace）では<strong>使える機能がかなり異なります</strong>。特に<strong>カスタム指示・記憶（パーソナライズ）機能は、法人版では使えません</strong>。一方でデータ保護や管理機能は法人版が圧倒的に優れます。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>項目</th><th>個人版（AI Pro等）</th><th>法人版（Business Standard）</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-cell">データのモデル学習</td>
+          <td><span class="tag tag-partial">デフォON</span><span class="muted">手動オフが必要</span></td>
+          <td><span class="tag tag-yes">学習されない</span><span class="muted">人間レビューもなし</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">カスタム指示</td>
+          <td><span class="tag tag-yes">あり</span></td>
+          <td><span class="tag tag-no">なし</span><span class="muted">設定ページ自体が無い</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">記憶・パーソナライズ</td>
+          <td><span class="tag tag-yes">あり</span></td>
+          <td><span class="tag tag-no">制限</span><span class="muted">プライバシー保護で意図的に無効</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">チャット横断の記憶</td>
+          <td><span class="tag tag-yes">あり</span></td>
+          <td><span class="tag tag-partial">弱い</span><span class="muted">日をまたぐと覚えていない傾向</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">NotebookLM</td>
+          <td><span class="tag tag-yes">あり</span></td>
+          <td><span class="tag tag-yes">あり（拡張）</span><span class="muted">管理者設定でオフの場合も</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">Gems（カスタムAI）</td>
+          <td><span class="tag tag-yes">あり</span></td>
+          <td><span class="tag tag-yes">あり</span><span class="muted">組織で共有運用も可</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">Workspaceアプリ統合<br><span class="muted">Gmail/Docs/Sheets/Meet</span></td>
+          <td><span class="tag tag-partial">限定的</span></td>
+          <td><span class="tag tag-yes">全面統合</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">管理者コントロール</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="tag tag-yes">あり</span><span class="muted">使用量レポート・DLP・オンオフ</span></td>
+        </tr>
+        <tr>
+          <td class="label-cell">料金体系</td>
+          <td>個人で月額契約</td>
+          <td>ユーザー数 × 月額</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <div class="c-title">法人版で「使えない」個人版の機能（要注意）</div>
+    <p><strong>① カスタム指示：</strong>法人版にはカスタム指示の設定ページが存在しません。「いつも丁寧語で」などの常時ルールを登録できないため、必要なら毎回プロンプトで指示します。<br>
+    <strong>② 記憶・パーソナライズ：</strong>個人版でテスト導入されている「好みを覚える」機能は、法人版では<strong>プライバシー保護のため意図的に制限</strong>されています。<br>
+    <strong>③ 結果として、</strong>法人版は「毎回まっさらな状態から会話する」前提になります。これは情報漏えいリスクを下げる設計でもあります。<br>
+    <span class="muted">※これらはGoogle側の仕様（管理者設定の問題ではない）として複数の実利用報告で確認されたものです（2026年前半時点）。今後の提供拡大により変わる可能性があるため、導入時は最新の仕様をご確認ください。</span></p>
+  </div>
+
+  <h3>法人版ならではの強み</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="st-label">データ保護</div><div class="st-value sub">学習に<br>使われない</div><div class="st-note">入力内容はモデル改善に不使用・人間レビューなし</div></div>
+    <div class="stat-card"><div class="st-label">管理機能</div><div class="st-value sub">Geminiレポート</div><div class="st-note">機能別・ユーザー別・アプリ別の使用量を可視化</div></div>
+    <div class="stat-card"><div class="st-label">セキュリティ</div><div class="st-value sub">DLP対応</div><div class="st-note">情報漏えい防止／アプリ単位のオンオフ制御</div></div>
+    <div class="stat-card"><div class="st-label">業務統合</div><div class="st-value sub">全アプリ横断</div><div class="st-note">Gmail・Docs・Sheets・Meetを横断して支援</div></div>
+  </div>
+  <div class="callout note">
+    <div class="c-title">NotebookLMの扱いを正確に</div>
+    <p>NotebookLM（資料を読み込ませて要約・Q&amp;Aするツール）は、公式には <strong>Business Standard以上に含まれます</strong>（拡張利用も可）。ただし管理者が「追加サービス」として<strong>オン/オフを制御でき、組織によっては無効化されている</strong>ことがあります。自社で見当たらない場合は、Geminiやデータ自体が無いのではなく<strong>管理コンソールで無効化されている可能性</strong>を、まず管理者にご確認ください。</p>
+  </div>
+
+  <h3>使用枠を増やす「AI Expanded Access」アドオン</h3>
+  <p>2026年2月5日提供開始の<strong>任意の追加アドオン</strong>。Business Standard/Plus・Enterprise各版に付けられ、AIを多用するユーザーの利用枠を拡張します。割り当てられたユーザーには画面に「<strong>Expanded</strong>」バッジが表示されます。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>対象機能</th><th>アドオンで拡張される内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label-cell">Geminiアプリ</td><td>Gemini 3 Pro など高性能モデルでの高度な推論の利用枠が拡大</td></tr>
+        <tr><td class="label-cell">NotebookLM</td><td>分析できる情報ソース数の上限拡大、音声概要・インフォグラフィック等の高度な出力</td></tr>
+        <tr><td class="label-cell">画像・動画生成</td><td>Nano Banana Pro（画像）・Veo 3.1（動画）の高利用枠</td></tr>
+        <tr><td class="label-cell">Google Flow</td><td>2026年7月7日まで、月2,000クレジットを付与（Flow専用）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <div class="c-title">2026年3月1日からの重要な変更</div>
+    <p>Business／Enterpriseでは、Nano Banana Proによる<strong>高度な画像生成</strong>やVeo 3.1による<strong>動画生成</strong>の「高い利用枠」がプロモーションで提供されていましたが、<strong>2026年3月1日以降、この高度な画像・動画生成を継続利用するにはAI Expanded Accessアドオンの購入が必要</strong>になりました。標準枠での基本的な生成は引き続き可能です。</p>
+  </div>
+
+  <div class="callout note">
+    <div class="c-title">法人版だけの“落とし穴”：アクティビティをオフにすると連携が止まる</div>
+    <p>個人版と同様にアクティビティ（履歴）をオフにできますが、<strong>オフにするとGmail・ドライブ・カレンダー等のWorkspace連携機能が使えなくなります</strong>。「学習されないように全部オフ」と安易に設定すると業務機能まで止まるため、法人版は<strong>そもそも学習されない</strong>点をふまえ、連携を活かす運用が現実的です。</p>
+  </div>
+
+  <div class="summary-box">
+    <p>法人版Geminiは<strong>「個人版の機能をそのまま会社で使えるもの」ではありません</strong>。カスタム指示・記憶といった便利機能は無い代わりに、<strong>データが学習されない・管理者が統制できる</strong>という、企業利用に不可欠な安全性を備えています。社員に配布するなら、まず<strong>「カスタム指示と記憶は無い」「だから毎回コンテキストを渡す」</strong>という前提を周知するのが、トラブルを防ぐコツです。</p>
+  </div>
+
+  <p class="tiny">※ 法人プランの料金・機能・アドオン提供状況は変更が頻繁です。導入判断の前に、必ず<strong>Google Workspace公式の料金ページと管理者ヘルプ</strong>、および自社の管理コンソール設定をご確認ください。なお、開発者向けの Gemini CLI・Code Assist 等は別系統の「Gemini Enterprise」で提供されます（本資料の対象外）。</p>
+</section>
+
+<!-- ============================================================= -->
 <!-- PART 2 -->
 <!-- ============================================================= -->
 <div class="part-divider">
   <div class="part-label-wrap">
     <div class="part-label">PART 2</div>
-    <div class="part-title">基本の制約</div>
+    <div class="part-title">基本の制約（主に個人版）</div>
     <p class="part-desc">機能別に「どれくらい使えるか」をプランごとに比較します。実務で最も気になる上限の早見表です。</p>
   </div>
 </div>
@@ -2651,13 +2830,15 @@
     <li>Google公式ブログ「Gemini 3 / Gemini 3.1 Pro / Gemini 3 Flash / Gemini 3.5 Flash」発表記事</li>
     <li>Google公式「Gemini Drops」「Gemini アプリ リリースノート」</li>
     <li>Google I/O 2026 関連発表（Gemini 3.5世代・Gemini Omni・使用量モデル刷新）</li>
-    <li>Google Workspace 管理者ヘルプ「Gemini アプリのオン／オフ」</li>
+    <li>Google Workspace 管理者ヘルプ「Gemini アプリのオン／オフ」「AI Expanded Access」「Gemini の使用を開始」</li>
+    <li>Google Workspace 公式料金（Business Starter／Standard／Plus）</li>
+    <li>Gemini アプリ ヘルプ「仕事用または学校用アカウントで Gemini を利用する」</li>
     <li>ITmedia、Impress Watch、jetstream.blog 等の報道</li>
     <li>AI総合研究所、Zenken AI、テックキャンプ 等の解説（使用量モデル・制限の検証）</li>
     <li>Artificial Analysis ほかモデル公表値（事実性ベンチマーク）</li>
   </ul>
   <div class="footer-meta">
-    <span>Version 3.1 — 2026/06/14 Updated（厳密ファクトチェック反映版）</span>
+    <span>Version 3.2 — 2026/06/14 Updated（法人プラン追加・厳密ファクトチェック反映版）</span>
     <span>作成：AI Labo</span>
   </div>
 </footer>
